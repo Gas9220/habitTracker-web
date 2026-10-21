@@ -141,6 +141,102 @@ h1, h2, h3 {
   text-decoration: none;
 }
 
+.header-end {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* MARK: Language menu */
+
+.language-menu {
+  position: relative;
+}
+
+.language-menu summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--text-2);
+  font-size: 14px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.language-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.language-menu summary:hover {
+  color: var(--text);
+}
+
+.language-menu .globe {
+  width: 16px;
+  height: 16px;
+}
+
+.language-menu .chevron {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.15s;
+}
+
+.language-menu[open] .chevron {
+  transform: rotate(180deg);
+}
+
+.language-menu ul {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 20;
+  min-width: 180px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
+}
+
+.language-menu a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  color: var(--text);
+  font-size: 15px;
+}
+
+.language-menu a:hover {
+  background: var(--blue-soft);
+  text-decoration: none;
+}
+
+.language-menu a[aria-current] {
+  font-weight: 600;
+}
+
+.language-menu .tick {
+  width: 16px;
+  height: 16px;
+  color: var(--blue);
+  visibility: hidden;
+}
+
+.language-menu a[aria-current] .tick {
+  visibility: visible;
+}
+
 /* MARK: Hero */
 
 .hero {
@@ -604,6 +700,13 @@ section {
 }
 
 /* MARK: Small screens */
+
+/* Section links in some languages are long: below this width the header keeps the language menu only. */
+@media (max-width: 1000px) {
+  .site-nav {
+    display: none;
+  }
+}
 
 @media (max-width: 900px) {
   .hero .container,

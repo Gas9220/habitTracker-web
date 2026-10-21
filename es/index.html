@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HabitTracker – Hábitos que se quedan</title>
+  <meta name="description" content="HabitTracker es un registro de hábitos sencillo y privado para iPhone, iPad, Mac y Apple Watch. Registra cada día, recibe recordatorios, usa temporizadores y sigue tus rachas.">
+  <meta name="theme-color" content="#0088ff">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HabitTracker – Hábitos que se quedan">
+  <meta property="og:description" content="Un registro de hábitos sencillo y privado para iPhone, iPad, Mac y Apple Watch.">
+  <meta property="og:image" content="https://gas9220.github.io/habitTracker-web/images/app-icon.png">
+  <meta property="og:url" content="https://gas9220.github.io/habitTracker-web/es/">
+  <link rel="canonical" href="https://gas9220.github.io/habitTracker-web/es/">
+  <link rel="alternate" hreflang="en" href="https://gas9220.github.io/habitTracker-web/">
+  <link rel="alternate" hreflang="it" href="https://gas9220.github.io/habitTracker-web/it/">
+  <link rel="alternate" hreflang="fr" href="https://gas9220.github.io/habitTracker-web/fr/">
+  <link rel="alternate" hreflang="es" href="https://gas9220.github.io/habitTracker-web/es/">
+  <link rel="alternate" hreflang="x-default" href="https://gas9220.github.io/habitTracker-web/">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+  <link rel="stylesheet" href="../styles.css">
+
+</head>
+<body>
+
+  <!-- Icons used on the page, drawn once and reused with <use>. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/></symbol>
+      <symbol id="i-sunrise" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19h18"/><path d="M7 19a5 5 0 0 1 10 0"/><path d="M12 4v4M5 10.5l1.5 1.5M19 10.5L17.5 12"/></symbol>
+      <symbol id="i-timer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 10v3.5l2.5 2"/><path d="M10 2.5h4"/></symbol>
+      <symbol id="i-quit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 21h4"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M7 16v-5M12 16V6M17 16v-8"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.5 6 .8-4.4 4.1 1.1 6L12 16.6l-5.3 2.8 1.1-6-4.4-4.1 6-.8z"/></symbol>
+      <symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+      <symbol id="i-laptop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2 19.5h20"/></symbol>
+      <symbol id="i-export" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11M7.5 9.5L12 14l4.5-4.5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+      <symbol id="i-person" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+      <symbol id="i-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 6.1A9.6 9.6 0 0 1 12 6c5 0 9 6 9 6a16 16 0 0 1-2.5 3.1M6.6 6.6C4.4 8.2 3 12 3 12s4 6 9 6a8.8 8.8 0 0 0 4.4-1.2"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2" width="11" height="20" rx="2.5"/><path d="M11 18h2"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10l5 5 5-5"/></symbol>
+      <symbol id="i-tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="#top">
+        <img src="../images/app-icon.png" alt="" width="32" height="32">
+        HabitTracker
+      </a>
+      <div class="header-end">
+        <nav class="site-nav" aria-label="Principal">
+          <a href="#features">Funciones</a>
+          <a href="#screenshots">Capturas</a>
+          <a href="#watch">Apple Watch</a>
+          <a href="#privacy">Privacidad</a>
+          <a href="#contact">Contacto</a>
+        </nav>
+        <details class="language-menu">
+          <summary aria-label="Idioma: Español">
+            <svg class="globe" aria-hidden="true"><use href="#i-globe"/></svg>
+            <span>Español</span>
+            <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </summary>
+          <ul>
+            <li><a href="../" hreflang="en" lang="en" data-language="en">English<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+            <li><a href="../it/" hreflang="it" lang="it" data-language="it">Italiano<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+            <li><a href="../fr/" hreflang="fr" lang="fr" data-language="fr">Français<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+            <li><a href="../es/" hreflang="es" lang="es" data-language="es" aria-current="page">Español<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- MARK: Hero -->
+    <section class="hero">
+      <div class="container">
+        <div>
+          <img class="hero-icon" src="../images/app-icon.png" alt="Icono de la app HabitTracker" width="88" height="88">
+          <h1>Hábitos<br>que se <span class="accent">quedan</span>.</h1>
+          <p class="lead">Registra cada día, recibe un recordatorio cuando lo necesites y mira cómo crecen tus rachas. Un registro de hábitos sencillo y privado para iPhone, iPad, Mac y Apple Watch.</p>
+          <div class="actions">
+            <a class="button" href="#features">Descubre qué hace</a>
+            <a class="button secondary" href="#contact">Contáctanos</a>
+          </div>
+          <p class="status-note">Muy pronto en el App Store.</p>
+          <ul class="platforms" aria-label="Disponible para">
+            <li>iPhone</li>
+            <li>iPad</li>
+            <li>Mac</li>
+            <li>Apple Watch</li>
+          </ul>
+        </div>
+        <div class="hero-devices">
+          <div class="phone">
+            <img src="../images/es/habits.png" alt="La lista de hábitos, agrupada en Mañana, Noche y En cualquier momento, con un botón de registro en cada hábito" width="660" height="1434">
+          </div>
+          <div class="watch">
+            <img src="../images/es/watch-today.png" alt="La pantalla Hoy de la app para Apple Watch" width="416" height="496">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARK: Features -->
+    <section id="features" class="section-alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Funciones</span>
+          <h2>Todo lo que necesitas, nada que sobre.</h2>
+          <p>Sigue los hábitos que quieres crear y los que quieres dejar atrás, a tu manera.</p>
+        </div>
+        <div class="features">
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-check"/></svg></div>
+            <h3>Hábitos a tu manera</h3>
+            <p>Elige un icono, un color y una animación. Repite los días que quieras o 3 veces por semana en cualquier día, una vez al día o varias, como 8 vasos de agua.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-sunrise"/></svg></div>
+            <h3>Rutinas</h3>
+            <p>Organiza tu día en Mañana, Tarde y Noche, y arrastra tus hábitos al orden que prefieras.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-timer"/></svg></div>
+            <h3>Temporizadores</h3>
+            <p>Para hábitos que se miden en minutos, como leer 30 minutos al día. Inicia y pausa desde la lista o desde tu muñeca, y recibe un aviso cuando termines.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-quit"/></svg></div>
+            <h3>Hábitos por dejar</h3>
+            <p>Tabaco, azúcar, el móvil hasta tarde: cuenta los días sin deslices desde el último.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-bell"/></svg></div>
+            <h3>Recordatorios</h3>
+            <p>Uno al día, o repartidos durante el día («3 de 8»), con los botones Hecho y Registrar en la propia notificación.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-pause"/></svg></div>
+            <h3>Días libres</h3>
+            <p>Omite un día de enfermedad, pausa un hábito o todos durante las vacaciones, sin romper tus rachas.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-chart"/></svg></div>
+            <h3>Estadísticas</h3>
+            <p>Porcentaje de cumplimiento, rachas, un mapa de constancia, tus mejores días de la semana y un calendario del año para cada hábito.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-star"/></svg></div>
+            <h3>Hitos</h3>
+            <p>Celebra las rachas de 7, 30 y 100 días, y comparte una racha como imagen.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-mic"/></svg></div>
+            <h3>Siri y Atajos</h3>
+            <p>«Registrar Carrera matutina en HabitTracker», o pregunta «Qué me queda hoy en HabitTracker». También funciona en Spotlight y con el botón de acción.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-laptop"/></svg></div>
+            <h3>iPad y Mac</h3>
+            <p>Tus hábitos en una barra lateral, con las estadísticas de cada uno al lado, y atajos de teclado en el Mac.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-export"/></svg></div>
+            <h3>Tus datos, a tu manera</h3>
+            <p>Exporta todo a CSV para una hoja de cálculo, y haz copias de seguridad y restáuralas con la app Archivos.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-globe"/></svg></div>
+            <h3>Hazla tuya</h3>
+            <p>Seis iconos para la app, y la app en English, Italiano, Français o Español, sea cual sea el idioma de tu dispositivo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARK: Screenshots -->
+    <section id="screenshots">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Capturas</span>
+          <h2>Más de cerca.</h2>
+          <p>Diseñada para iOS 26, con Liquid Glass, respuesta háptica y VoiceOver en todas partes.</p>
+        </div>
+        <div class="gallery" tabindex="0" aria-label="Capturas de la app">
+          <figure class="shot">
+            <div class="phone"><img src="../images/es/habits.png" alt="La lista de hábitos" width="660" height="1434" loading="lazy"></div>
+            <figcaption><strong>Tu día de un vistazo</strong><span>Registra con un toque</span></figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="phone"><img src="../images/es/statistics.png" alt="La pestaña Estadísticas con el cumplimiento, los registros, los días perfectos y la racha actual" width="660" height="1434" loading="lazy"></div>
+            <figcaption><strong>Estadísticas</strong><span>Semana, mes o año</span></figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="phone"><img src="../images/es/charts.png" alt="Un mapa de constancia de 16 semanas y el cumplimiento por día de la semana" width="660" height="1434" loading="lazy"></div>
+            <figcaption><strong>Descubre tus patrones</strong><span>Constancia y mejores días</span></figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="phone"><img src="../images/es/habit-year.png" alt="La página de un hábito con su racha, su cumplimiento, sus hitos y el calendario del año" width="660" height="1434" loading="lazy"></div>
+            <figcaption><strong>El año de cada hábito</strong><span>Rachas e hitos</span></figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="phone"><img src="../images/es/timer.png" alt="Un temporizador en cuenta atrás hacia un objetivo de 15 minutos" width="660" height="1434" loading="lazy"></div>
+            <figcaption><strong>Temporizadores</strong><span>Para hábitos que se miden en minutos</span></figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="phone"><img src="../images/es/editor.png" alt="La edición de un hábito: icono, color, estilo y animación" width="660" height="1434" loading="lazy"></div>
+            <figcaption><strong>Hazla tuya</strong><span>Iconos, colores y animaciones</span></figcaption>
+          </figure>
+        </div>
+        <p class="gallery-hint">Desliza hacia un lado para ver más.</p>
+      </div>
+    </section>
+
+    <!-- MARK: Apple Watch -->
+    <section id="watch" class="section-alt">
+      <div class="container split">
+        <div>
+          <span class="eyebrow">Apple Watch</span>
+          <h2>En tu muñeca, todo el día.</h2>
+          <p>La app para Apple Watch muestra los hábitos de hoy y se sincroniza con tu iPhone, para que registres sin sacar el teléfono.</p>
+          <ul class="checklist">
+            <li>Registra con un toque, o ajusta la cuenta con la Digital Crown</li>
+            <li>Inicia y pausa temporizadores</li>
+            <li>Omite un día o anota un desliz</li>
+            <li>Estadísticas de la semana y del mes, y tus rachas más largas</li>
+            <li>Los hitos celebrados en tu muñeca</li>
+          </ul>
+        </div>
+        <div class="watch-row">
+          <div class="watch"><img src="../images/es/watch-today.png" alt="Los hábitos de hoy en el Apple Watch" width="416" height="496" loading="lazy"></div>
+          <div class="watch"><img src="../images/es/watch-habit.png" alt="El anillo de progreso de un hábito en el Apple Watch" width="416" height="496" loading="lazy"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARK: Privacy -->
+    <section id="privacy">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Privacidad</span>
+          <h2>Tus hábitos son solo tuyos.</h2>
+          <p>HabitTracker no recoge ningún dato. Lo que registras queda entre tú y tus dispositivos.</p>
+        </div>
+        <div class="privacy-points">
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-person"/></svg></div>
+            <h3>Sin cuenta</h3>
+            <p>Abre la app y empieza. No hay que registrarse en nada.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-eye-off"/></svg></div>
+            <h3>Sin rastreo</h3>
+            <p>Sin anuncios, sin analíticas y sin código de terceros.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-phone"/></svg></div>
+            <h3>En tus dispositivos</h3>
+            <p>Tus hábitos se guardan en tu dispositivo, y el Apple Watch se sincroniza directamente con tu iPhone.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARK: Contact -->
+    <section id="contact" class="section-alt">
+      <div class="container">
+        <div class="contact-card">
+          <span class="eyebrow">Contacto</span>
+          <h2>Nos encantará saber de ti.</h2>
+          <p>¿Preguntas, ideas o algo que no funciona como debería? Escríbenos un correo y te responderemos.</p>
+          <div class="actions">
+            <!-- Placeholder address, the same as AppInfo.supportEmail in the app: replace both before release. -->
+            <a class="button" href="mailto:support@example.com?subject=HabitTracker">
+              <svg width="20" height="20" aria-hidden="true"><use href="#i-mail"/></svg>
+              Escribir a soporte
+            </a>
+          </div>
+          <p class="email"><a href="mailto:support@example.com?subject=HabitTracker">support@example.com</a></p>
+
+          <div class="faq">
+            <details>
+              <summary>¿Cuándo podré descargar HabitTracker?</summary>
+              <p>Ya casi está: primero llegará una beta en TestFlight y después el App Store. Esta página enlazará a ella en cuanto salga.</p>
+            </details>
+            <details>
+              <summary>¿En qué dispositivos funciona?</summary>
+              <p>iPhone y iPad con iOS 26 o posterior, Mac con macOS 26 o posterior, y Apple Watch con watchOS 26 o posterior, enlazado con un iPhone.</p>
+            </details>
+            <details>
+              <summary>¿Puedo contactar con soporte desde la app?</summary>
+              <p>Sí: Ajustes › Soporte › Contactar con soporte prepara un correo con detalles que nos ayudan a encontrar un problema, como la versión de la app, tu dispositivo y la versión de iOS. Nunca incluye los nombres, las notas ni los lugares de tus hábitos, y ves todo antes de enviarlo.</p>
+            </details>
+            <details>
+              <summary>¿Cómo paso mis hábitos a un iPhone nuevo?</summary>
+              <p>En Ajustes › Copia de seguridad, elige Hacer copia en Archivos y guarda el archivo en un sitio al que llegues desde el iPhone nuevo, como iCloud Drive. Después, en el iPhone nuevo, elige Restaurar copia de seguridad.</p>
+            </details>
+            <details>
+              <summary>¿Puedo saltarme un día sin perder la racha?</summary>
+              <p>Sí. Desliza un hábito y elige Omitir hoy, activa En pausa al editar un hábito, o usa Ajustes › Vacaciones para pausarlos todos. Los días en pausa nunca cuentan como no cumplidos.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© 2026 HabitTracker</span>
+      <nav aria-label="Pie de página">
+        <a href="#features">Funciones</a>
+        <a href="#privacy">Privacidad</a>
+        <a href="#contact">Contacto</a>
+      </nav>
+      <span>Apple, Apple Watch, iPhone, iPad y Mac son marcas comerciales de Apple Inc.</span>
+    </div>
+  </footer>
+
+  <script>
+    // The language menu: closes on a click outside it or on Escape, keeps the section you're
+    // reading when you switch, and remembers the choice so the English page stops redirecting.
+    (function () {
+      var menu = document.querySelector(".language-menu");
+      document.addEventListener("click", function (event) {
+        if (menu.open && !menu.contains(event.target)) menu.open = false;
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && menu.open) {
+          menu.open = false;
+          menu.querySelector("summary").focus();
+        }
+      });
+      menu.querySelectorAll("a[data-language]").forEach(function (link) {
+        link.addEventListener("click", function () {
+          try { localStorage.setItem("language", link.dataset.language); } catch (error) {}
+          link.href = link.href.split("#")[0] + location.hash;
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
