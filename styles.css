@@ -1,0 +1,697 @@
+/* HabitTracker website. Colors come from the app icon's blue (#0088FF). */
+
+:root {
+  --blue: #0088ff;
+  --blue-strong: #006be0;
+  --blue-soft: rgba(0, 136, 255, 0.1);
+  /* A deeper blue behind white text, so buttons stay readable in both modes. */
+  --button: #0071e3;
+  --button-hover: #0062c4;
+  --bg: #ffffff;
+  --bg-alt: #f4f7fb;
+  --card: #ffffff;
+  --text: #1d1d1f;
+  --text-2: #5c6470;
+  --border: rgba(15, 23, 42, 0.08);
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+  --device: #1d1d1f;
+  --radius: 20px;
+  --max: 1120px;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --blue: #3ba2ff;
+    --blue-strong: #5cb3ff;
+    --blue-soft: rgba(59, 162, 255, 0.14);
+    --bg: #0b0c0f;
+    --bg-alt: #121419;
+    --card: #17191f;
+    --text: #f5f5f7;
+    --text-2: #a3a9b4;
+    --border: rgba(255, 255, 255, 0.09);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+    --device: #2a2c31;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 100vw counts the scrollbar, so the full-width gallery can be a few pixels too wide. */
+main {
+  overflow-x: clip;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1, h2, h3 {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* MARK: Header */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.brand:hover {
+  text-decoration: none;
+}
+
+.brand img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+.site-nav {
+  display: flex;
+  gap: 24px;
+  font-size: 15px;
+}
+
+.site-nav a {
+  color: var(--text-2);
+}
+
+.site-nav a:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* MARK: Hero */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 72px 0 0;
+  background:
+    radial-gradient(60% 50% at 75% 30%, rgba(0, 136, 255, 0.22), transparent 70%),
+    radial-gradient(40% 40% at 10% 0%, rgba(0, 136, 255, 0.1), transparent 70%);
+}
+
+.hero .container {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.hero-icon {
+  width: 88px;
+  height: 88px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 136, 255, 0.35);
+  margin-bottom: 28px;
+}
+
+.hero h1 {
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 700;
+}
+
+.hero h1 .accent {
+  color: var(--blue);
+}
+
+.hero .lead {
+  font-size: clamp(18px, 2.2vw, 21px);
+  color: var(--text-2);
+  margin: 20px 0 32px;
+  max-width: 34em;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 16px;
+  background: var(--button);
+  color: #fff;
+  transition: background 0.15s;
+}
+
+.button:hover {
+  background: var(--button-hover);
+  text-decoration: none;
+}
+
+.button.secondary {
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.button.secondary:hover {
+  background: color-mix(in srgb, var(--blue) 20%, transparent);
+}
+
+.status-note {
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.platforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 28px;
+  padding: 0;
+  list-style: none;
+}
+
+.platforms li {
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--text-2);
+  background: var(--card);
+}
+
+.hero-devices {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-top: 8px;
+}
+
+.hero-devices .phone {
+  width: min(340px, 78%);
+  margin-bottom: -96px;
+}
+
+.hero-devices .watch {
+  position: absolute;
+  right: 2%;
+  bottom: 40px;
+  width: min(150px, 30%);
+}
+
+/* MARK: Device frames */
+
+.phone {
+  border: 10px solid var(--device);
+  border-radius: 54px;
+  overflow: hidden;
+  background: var(--device);
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.25);
+}
+
+.phone img {
+  border-radius: 44px;
+  width: 100%;
+  height: auto;
+}
+
+.watch {
+  border: 9px solid var(--device);
+  border-radius: 46px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.3);
+}
+
+.watch img {
+  border-radius: 36px;
+  width: 100%;
+  height: auto;
+}
+
+/* MARK: Sections */
+
+section {
+  padding: 96px 0;
+}
+
+.section-alt {
+  background: var(--bg-alt);
+}
+
+.section-head {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 56px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 12px;
+}
+
+.section-head h2 {
+  font-size: clamp(30px, 4.2vw, 44px);
+  font-weight: 700;
+}
+
+.section-head p {
+  color: var(--text-2);
+  font-size: 19px;
+  margin: 16px 0 0;
+}
+
+/* MARK: Features */
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.feature {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.feature-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  margin-bottom: 18px;
+}
+
+.feature-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.feature h3 {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.feature p {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 16px;
+}
+
+/* MARK: Screenshots */
+
+/* Full width, with the first and last screenshots lined up with the page's content. */
+.gallery {
+  --edge: max(24px, calc(50vw - var(--max) / 2 + 24px));
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 var(--edge);
+  padding: 8px var(--edge) 32px;
+  margin: 0 calc(50% - 50vw);
+  scrollbar-width: thin;
+}
+
+.shot {
+  flex: 0 0 auto;
+  width: 260px;
+  margin: 0;
+  scroll-snap-align: center;
+}
+
+.shot .phone {
+  border-width: 8px;
+  border-radius: 44px;
+  box-shadow: var(--shadow);
+}
+
+.shot .phone img {
+  border-radius: 36px;
+}
+
+.shot figcaption {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.shot figcaption strong {
+  display: block;
+  font-size: 16px;
+}
+
+.shot figcaption span {
+  display: block;
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.gallery-hint {
+  text-align: center;
+  color: var(--text-2);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* MARK: Apple Watch */
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.split h2 {
+  font-size: clamp(30px, 4.2vw, 44px);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.split p {
+  color: var(--text-2);
+  font-size: 19px;
+  margin: 0 0 16px;
+}
+
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: grid;
+  gap: 12px;
+}
+
+.checklist li {
+  position: relative;
+  padding-left: 32px;
+}
+
+.checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.6 2.6L14 7.5' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat;
+}
+
+.watch-row {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.watch-row .watch {
+  width: 200px;
+}
+
+.watch-row .watch:nth-child(2) {
+  margin-top: 48px;
+}
+
+/* MARK: Privacy */
+
+.privacy-points {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.privacy-points .feature {
+  text-align: center;
+}
+
+.privacy-points .feature-icon {
+  margin: 0 auto 18px;
+}
+
+/* MARK: Contact */
+
+.contact-card {
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 48px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.contact-card h2 {
+  font-size: clamp(30px, 4.2vw, 40px);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.contact-card > p {
+  color: var(--text-2);
+  font-size: 18px;
+  margin: 0 auto 28px;
+  max-width: 34em;
+}
+
+.contact-card .actions {
+  justify-content: center;
+}
+
+.email {
+  font-weight: 600;
+  font-size: 18px;
+  margin: 16px 0 0;
+}
+
+.faq {
+  text-align: left;
+  margin-top: 40px;
+  border-top: 1px solid var(--border);
+}
+
+.faq details {
+  border-bottom: 1px solid var(--border);
+  padding: 18px 0;
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: "+";
+  color: var(--blue);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.faq details[open] summary::after {
+  content: "–";
+}
+
+.faq details p {
+  margin: 10px 0 0;
+  color: var(--text-2);
+}
+
+/* MARK: Footer */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 0;
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.site-footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.site-footer nav {
+  display: flex;
+  gap: 20px;
+}
+
+.site-footer a {
+  color: var(--text-2);
+}
+
+/* MARK: Small screens */
+
+@media (max-width: 900px) {
+  .hero .container,
+  .split {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding-top: 48px;
+    text-align: center;
+  }
+
+  .hero .lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-icon {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .actions,
+  .platforms {
+    justify-content: center;
+  }
+
+  .features,
+  .privacy-points {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .split .watch-row {
+    order: -1;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .site-nav {
+    display: none;
+  }
+
+  section {
+    padding: 64px 0;
+  }
+
+  .features,
+  .privacy-points {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-devices .phone {
+    width: 72%;
+  }
+
+  .hero-devices .watch {
+    right: 0;
+    width: 30%;
+  }
+
+  .gallery {
+    padding: 8px 16px 24px;
+    margin: 0 -16px;
+  }
+
+  .shot {
+    width: 220px;
+  }
+
+  .watch-row .watch {
+    width: 150px;
+  }
+
+  .contact-card {
+    padding: 32px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
