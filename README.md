@@ -1,6 +1,8 @@
 # HabitTracker website
 
-The website of HabitTracker, the habit tracker for iPhone, iPad, Mac and Apple Watch: what the app does, screenshots, privacy and how to get in touch. A static site with no build step, made for GitHub Pages.
+The website of HabitTracker, the habit tracker for iPhone, iPad, Mac and Apple Watch: what the app does, screenshots, privacy and how to get in touch. A static site with no build step.
+
+**Live at https://gas9220.github.io/habitTracker-web/**, published by GitHub Pages from the root of `main`: every push to `main` updates it within a minute or two. Pages is free only for public repositories, so this one stays public. `.nojekyll` tells Pages to serve the files as they are, without running Jekyll.
 
 ## Files
 
