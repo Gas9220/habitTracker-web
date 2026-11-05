@@ -110,6 +110,26 @@ def alternates(page):
     return "\n".join(lines)
 
 
+def sitemap():
+    """Every page in every language, each with its translations, for search engines. A robots.txt
+    can't point to it while the site is a project page: crawlers read that only at the domain's
+    root, which belongs to another repository."""
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+    ]
+    for page in PAGES:
+        for language in LANGUAGES:
+            lines.append("  <url>")
+            lines.append(f"    <loc>{BASE_URL}{folder(language)}{page}</loc>")
+            for code in LANGUAGES:
+                lines.append(f'    <xhtml:link rel="alternate" hreflang="{code}" href="{BASE_URL}{folder(code)}{page}"/>')
+            lines.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{BASE_URL}{page}"/>')
+            lines.append("  </url>")
+    lines.append("</urlset>")
+    return "\n".join(lines) + "\n"
+
+
 def build(language, page, layout, templates, strings):
     template, title_key, description_key, og_description_key = PAGES[page]
     # Relative links: up to the site's root for the stylesheet and images, and up to the
@@ -177,6 +197,9 @@ def main():
             output.parent.mkdir(parents=True, exist_ok=True)
             output.write_text(build(language, page, layout, templates, strings), encoding="utf-8")
             print(f"wrote {output.relative_to(ROOT)}")
+
+    (ROOT / "sitemap.xml").write_text(sitemap(), encoding="utf-8")
+    print("wrote sitemap.xml")
 
 
 if __name__ == "__main__":

@@ -582,6 +582,37 @@ section {
   margin-top: 48px;
 }
 
+/* MARK: Mac */
+
+/* The window gets the wider column; the menu bar's panel overlaps its corner. */
+.split.mac {
+  grid-template-columns: 1.25fr 1fr;
+}
+
+.mac-shots {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.mac-window {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.18);
+}
+
+.mac-menu {
+  position: absolute;
+  right: -16px;
+  bottom: -40px;
+  width: 34%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.24);
+}
+
 /* MARK: Privacy */
 
 .privacy-points {
@@ -793,6 +824,10 @@ section {
   .split .watch-row {
     order: -1;
   }
+
+  .split.mac {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
@@ -837,6 +872,11 @@ section {
 
   .watch-row .watch {
     width: 150px;
+  }
+
+  .mac-menu {
+    right: 0;
+    width: 42%;
   }
 
   .contact-card {

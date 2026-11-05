@@ -64,6 +64,11 @@
             <p>{{feature_reminders_text}}</p>
           </article>
           <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-note"/></svg></div>
+            <h3>{{feature_notes_title}}</h3>
+            <p>{{feature_notes_text}}</p>
+          </article>
+          <article class="feature">
             <div class="feature-icon"><svg aria-hidden="true"><use href="#i-pause"/></svg></div>
             <h3>{{feature_days_off_title}}</h3>
             <p>{{feature_days_off_text}}</p>
@@ -97,6 +102,11 @@
             <div class="feature-icon"><svg aria-hidden="true"><use href="#i-globe"/></svg></div>
             <h3>{{feature_yours_title}}</h3>
             <p>{{feature_yours_text}}</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-access"/></svg></div>
+            <h3>{{feature_access_title}}</h3>
+            <p>{{feature_access_text}}</p>
           </article>
         </div>
       </div>
@@ -132,8 +142,24 @@
             <figcaption><strong>{{shot_timer_title}}</strong><span>{{shot_timer_text}}</span></figcaption>
           </figure>
           <figure class="shot">
+            <div class="phone"><img src="{{images}}lock-screen.png" alt="{{shot_lock_alt|attr}}" width="660" height="1434" loading="lazy"></div>
+            <figcaption><strong>{{shot_lock_title}}</strong><span>{{shot_lock_text}}</span></figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="phone"><img src="{{images}}control.png" alt="{{shot_control_alt|attr}}" width="660" height="1434" loading="lazy"></div>
+            <figcaption><strong>{{shot_control_title}}</strong><span>{{shot_control_text}}</span></figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="phone"><img src="{{images}}day-note.png" alt="{{shot_note_alt|attr}}" width="660" height="1434" loading="lazy"></div>
+            <figcaption><strong>{{shot_note_title}}</strong><span>{{shot_note_text}}</span></figcaption>
+          </figure>
+          <figure class="shot">
             <div class="phone"><img src="{{images}}editor.png" alt="{{shot_editor_alt|attr}}" width="660" height="1434" loading="lazy"></div>
             <figcaption><strong>{{shot_editor_title}}</strong><span>{{shot_editor_text}}</span></figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="phone"><img src="{{images}}templates.png" alt="{{shot_templates_alt|attr}}" width="660" height="1434" loading="lazy"></div>
+            <figcaption><strong>{{shot_templates_title}}</strong><span>{{shot_templates_text}}</span></figcaption>
           </figure>
         </div>
         <p class="gallery-hint">{{screenshots_hint}}</p>
@@ -162,8 +188,30 @@
       </div>
     </section>
 
+    <!-- MARK: Mac -->
+    <section id="mac">
+      <div class="container split mac">
+        <div class="mac-shots">
+          <img class="mac-window" src="{{images}}mac-window.png" alt="{{mac_window_alt|attr}}" width="1100" height="794" loading="lazy">
+          <img class="mac-menu" src="{{images}}mac-menu-bar.png" alt="{{mac_menu_alt|attr}}" width="360" height="374" loading="lazy">
+        </div>
+        <div>
+          <span class="eyebrow">Mac</span>
+          <h2>{{mac_title}}</h2>
+          <p>{{mac_lead}}</p>
+          <ul class="checklist">
+            <li>{{mac_item_menu_bar}}</li>
+            <li>{{mac_item_shortcuts}}</li>
+            <li>{{mac_item_undo}}</li>
+            <li>{{mac_item_dock}}</li>
+            <li>{{mac_item_login}}</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- MARK: Privacy -->
-    <section id="privacy">
+    <section id="privacy" class="section-alt">
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">{{nav_privacy}}</span>
@@ -192,7 +240,7 @@
     </section>
 
     <!-- MARK: Contact -->
-    <section id="contact" class="section-alt">
+    <section id="contact">
       <div class="container">
         <div class="contact-card">
           <span class="eyebrow">{{nav_contact}}</span>

@@ -10,12 +10,13 @@ The website of HabitTracker, the habit tracker for iPhone, iPad, Mac and Apple W
 src/layout.html        The head, header and footer every page shares, with {{key}} where each language's text goes
 src/pages/             Each page's content: home, support (questions and answers, contact) and privacy (the policy)
 src/strings/<lang>.json  The text in each language: en, it, fr, es
-build.py               Writes the pages from those
+build.py               Writes the pages from those, and sitemap.xml with every page in every language
+make-social-images.swift  Draws images/<lang>/social.jpg, the picture shown with links to the site
 index.html             English, the home page (generated), with support/ and privacy/ beside it
 it/, fr/, es/          The other languages' pages, the same three in each (generated)
 styles.css             Styles, with dark mode (prefers-color-scheme) and layouts for phones
 images/                The app icon (app-icon, apple-touch-icon, favicon)
-images/<lang>/         The screenshots in each language, resized for the web
+images/<lang>/         The screenshots in each language, resized for the web, and social.jpg
 ```
 
 ## Changing the text or the page
@@ -44,13 +45,28 @@ xcrun simctl launch <iPhone> <bundle ID> -ui-testing -sample-data -AppleLanguage
 xcrun simctl launch <watch> <bundle ID>.watchkitapp -ui-testing -sample-data -AppleLanguages "(it)" -AppleLocale it_IT
 ```
 
-The screens, in order: the habit list, Statistics, its charts (scrolled to the heatmap), Read 20 Pages' page (from the Habits card), Stretch's timer and Morning Run's editor; on the watch, Today and Read 20 Pages. The copies in `images/<lang>/` are the iPhone screenshots at half size (660 × 1434) and the watch screenshots as they are:
+The screens, in order: the habit list, Statistics, its charts (scrolled to the heatmap), Read 20 Pages' page (from the Habits card), Stretch's timer, the Lock Screen with Stretch's timer running, Control Center with the Habit Timer control, a day note on Read 20 Pages, Morning Run's editor and the templates (New Habit › Start from a Template); on the watch, Today and Read 20 Pages.
+
+- The Lock Screen, Control Center, the day note and the templates were taken by a throwaway UI test (never committed), as the app's workflow describes for screenshots. The day note was saved and opened again, so the keyboard is gone.
+- The Lock Screen is Notification Center, pulled down over the Home Screen: it looks the same and shows the timer's Live Activity, but with the phone unlocked. Locked, the simulator draws the countdown without its seconds ("9:––"), however the screen is woken. Its clock is the real time, since any `--time` override freezes the countdown too, and its date and Control Center are drawn by the system in the simulator's own language: for each language, set the simulator's first (`AppleLanguages` and `AppleLocale` in its `.GlobalPreferences.plist`, then a reboot). A timer's first Live Activity asks to be allowed, and later whether to keep allowing them: Allow, then Always Allow.
+- Control Center has the Habit Timer control, added by hand once (set to Next Timer, two columns wide so its name shows); the simulator's Control Center has nothing else.
+
+The Mac's, in `../assets/screenshots/<lang>/mac/`, are the window on Read 20 Pages' statistics and the menu bar's panel, drawn by the app itself in a light appearance by a temporary hook (as the app's CLAUDE.md describes for looking at a Mac view), so the window has no shadow or desktop around it. macOS 26's glass doesn't draw that way: the sidebar's list is drawn on its own and put in its place, and the glass behind it and behind the panel comes out transparent, so it's filled with light gray (`#F2F2F5` and `#F7F7F9`), as it looks on a light desktop.
+
+The copies in `images/<lang>/` are the iPhone screenshots at half size (660 × 1434), the watch screenshots as they are, and the Mac's window 1100 wide (`mac-window.png`) and panel 360 wide (`mac-menu-bar.png`):
 
 ```bash
 sips -Z 1434 ../assets/screenshots/it/iphone/01-habits.png --out images/it/habits.png
+sips --resampleWidth 1100 ../assets/screenshots/it/mac/01-window.png --out images/it/mac-window.png
 ```
 
 The app icon is rendered from the app's `AppIcon.icon` with Icon Composer's `ictool` into `../assets/icon/`, then resized with `sips`.
+
+After new screenshots or a change to the title or tagline, draw the pictures for shared links again: `swift make-social-images.swift`.
+
+## Search engines
+
+`sitemap.xml` lists every page in every language, with its translations; submit it in Google Search Console. A `robots.txt` pointing to it would be ignored here: crawlers read one only at the domain's root, `gas9220.github.io`, which isn't this repository. With a domain of its own the site would be at the root, and one could be added.
 
 ## Preview
 
