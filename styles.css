@@ -568,9 +568,11 @@ section {
   background: var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.6 2.6L14 7.5' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat;
 }
 
+/* Each keeps its own height: stretched to the row's, the first would be as much longer as the second sits lower. */
 .watch-row {
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   gap: 24px;
 }
 
