@@ -17,12 +17,12 @@ func plain(_ html: String) -> String {
         .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
 }
 
-let icon = NSImage(contentsOf: root.appending(path: "images/app-icon.png"))!
+let icon = NSImage(contentsOf: root.appending(path: "images/app-icon.webp"))!
 
 for language in ["en", "it", "fr", "es"] {
     let data = try Data(contentsOf: root.appending(path: "src/strings/\(language).json"))
     let strings = try JSONSerialization.jsonObject(with: data) as! [String: String]
-    let screenshot = NSImage(contentsOf: root.appending(path: "images/\(language)/habits.png"))!
+    let screenshot = NSImage(contentsOf: root.appending(path: "images/\(language)/habits.webp"))!
 
     let image = NSBitmapImageRep(
         bitmapDataPlanes: nil, pixelsWide: Int(size.width), pixelsHigh: Int(size.height),

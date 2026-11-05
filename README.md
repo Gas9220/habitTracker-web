@@ -13,13 +13,14 @@ src/guide/<lang>.html  The guide's text in each language: long, so in files of i
 src/strings/<lang>.json  The text in each language: en, it, fr, es
 build.py               Writes the pages from those, and sitemap.xml with every page in every language
 make-social-images.swift  Draws images/<lang>/social.jpg, the picture shown with links to the site
+make-images.sh         Writes the images in WebP from the originals in ../assets
 make-guide-pdfs.sh     Prints each language's guide to its guide/habittracker-guide.pdf
 src/404.html           The page for an address that doesn't exist: one page, whose script picks the language
 index.html             English, the home page (generated), with support/, privacy/ and guide/ beside it
 it/, fr/, es/          The other languages' pages, the same four in each (generated)
 styles.css             Styles, with dark mode (prefers-color-scheme) and layouts for phones
 images/                The app icon (app-icon, apple-touch-icon, favicon)
-images/<lang>/         The screenshots in each language, resized for the web, and social.jpg
+images/<lang>/         The screenshots in each language, in WebP and resized for the web, and social.jpg
 ```
 
 ## Changing the text or the page
@@ -69,14 +70,15 @@ The screens, in order: the habit list, Statistics, its charts (scrolled to the h
 
 The Mac's, in `../assets/screenshots/<lang>/mac/`, are the window on Read 20 Pages' statistics and the menu bar's panel, drawn by the app itself in a light appearance by a temporary hook (as the app's CLAUDE.md describes for looking at a Mac view), so the window has no shadow or desktop around it. macOS 26's glass doesn't draw that way: the sidebar's list is drawn on its own and put in its place, and the glass behind it and behind the panel comes out transparent, so it's filled with light gray (`#F2F2F5` and `#F7F7F9`), as it looks on a light desktop. Drawn this way, some colors in the sidebar's list are wrong: progress arcs and tinted icons come out white, and so does the selected habit's check-in circle. That's the capture, not the app; a real screenshot would be more faithful.
 
-The copies in `images/<lang>/` are the iPhone screenshots at half size (660 × 1434), the watch screenshots as they are, and the Mac's window 1100 wide (`mac-window.png`) and panel 360 wide (`mac-menu-bar.png`):
+The pages show copies in WebP, which look the same as PNG at this size in about a fifteenth of the room, written by a script from those originals: the iPhone screenshots at half size (660 × 1434), the watch screenshots as they are, and the Mac's window 1100 wide and panel 360 wide. It needs `cwebp` (`brew install webp`):
 
 ```bash
-sips -Z 1434 ../assets/screenshots/it/iphone/01-habits.png --out images/it/habits.png
-sips --resampleWidth 1100 ../assets/screenshots/it/mac/01-window.png --out images/it/mac-window.png
+./make-images.sh
 ```
 
-The app icon is rendered from the app's `AppIcon.icon` with Icon Composer's `ictool` into `../assets/icon/`, then resized with `sips`.
+Only `social.jpg` stays a JPEG, since not everything that shows a link's picture reads WebP, and the favicon and the Home Screen icon stay PNGs.
+
+The app icon is rendered from the app's `AppIcon.icon` with Icon Composer's `ictool` into `../assets/icon/`. The favicon and the Home Screen icon are resized from it with `sips`, and `make-images.sh` writes `app-icon.webp`.
 
 After new screenshots or a change to the title or tagline, draw the pictures for shared links again: `swift make-social-images.swift`.
 
