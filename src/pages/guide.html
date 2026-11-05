@@ -1,0 +1,23 @@
+
+    <!-- MARK: Guide -->
+    <section class="page">
+      <div class="container prose guide">
+        <span class="eyebrow">{{nav_guide}}</span>
+        <h1>{{guide_heading}}</h1>
+        <p class="lead">{{guide_lead}}</p>
+        <p class="guide-download">
+          <!-- Written by make-guide-pdfs.sh from this page: run it again after changing the guide. -->
+          <a class="button" href="habittracker-guide.pdf" download="{{guide_pdf_name|attr}}">
+            <svg width="20" height="20" aria-hidden="true"><use href="#i-export"/></svg>
+            {{guide_download}}
+          </a>
+        </p>
+        <nav class="guide-contents" aria-label="{{guide_contents|attr}}">
+          <h2>{{guide_contents}}</h2>
+{{guide_toc}}
+        </nav>
+        <!-- Each language's text is in src/guide/<lang>.html. -->
+{{guide_content}}
+        <p class="section-more"><a href="{{home}}support/">{{guide_more}}</a></p>
+      </div>
+    </section>

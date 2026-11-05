@@ -781,6 +781,71 @@ section {
   margin: 0;
 }
 
+/* MARK: Guide */
+
+.guide-download {
+  margin: 24px 0 0;
+}
+
+.guide-contents {
+  margin: 32px 0 8px;
+  padding: 20px 24px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.prose .guide-contents h2 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.guide-contents ol {
+  margin: 0;
+  padding-left: 20px;
+  columns: 2;
+  column-gap: 32px;
+}
+
+/* Padding, not margin, which a column's top would drop: the two columns start level. */
+.guide-contents li {
+  padding: 4px 0;
+  break-inside: avoid;
+}
+
+/* Below the sticky header when a link from the contents scrolls to it. */
+.guide h2[id] {
+  scroll-margin-top: 84px;
+}
+
+.guide ul {
+  margin: 12px 0 0;
+  padding-left: 22px;
+  color: var(--text-2);
+}
+
+.guide li {
+  margin: 8px 0;
+}
+
+.guide li::marker {
+  color: var(--blue);
+}
+
+.guide strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.guide p + p,
+.guide ul + p {
+  margin-top: 12px;
+}
+
 /* MARK: Small screens */
 
 /* Section links in some languages are long: below this width the header keeps the language menu only. */
@@ -831,6 +896,10 @@ section {
 }
 
 @media (max-width: 640px) {
+  .guide-contents ol {
+    columns: 1;
+  }
+
   body {
     font-size: 16px;
   }
@@ -887,5 +956,57 @@ section {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+}
+
+/* MARK: Print */
+
+/* What a printed page shows, and the guide's PDF (make-guide-pdfs.sh): the text in light colors,
+   with the brand on top and without the menus, the footer or the Download PDF button. */
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm 18mm;
+  }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f4f7fb;
+    --text: #1d1d1f;
+    --text-2: #3f4650;
+    --border: rgba(15, 23, 42, 0.12);
+  }
+
+  body {
+    background: #ffffff;
+  }
+
+  .site-header {
+    position: static;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: 0;
+  }
+
+  .site-header .header-end,
+  .site-footer,
+  .guide-download,
+  .section-more {
+    display: none;
+  }
+
+  .page {
+    padding-top: 8px;
+  }
+
+  .guide h2 {
+    break-after: avoid;
+  }
+
+  .guide p,
+  .guide li,
+  .guide-contents {
+    break-inside: avoid;
   }
 }

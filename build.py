@@ -5,7 +5,8 @@ src/strings/<language>.json.
     python3 build.py
 
 Each page is src/layout.html (the head, the header and the footer) around its content, from
-src/pages/. English is at the root (index.html, support/index.html, privacy/index.html), the other
+src/pages/. The guide's text is long, so each language has it in a file of its own,
+src/guide/<language>.html, whose <h2 id="…"> headings make its table of contents. English is at the root (index.html, support/index.html, privacy/index.html), the other
 languages in their own folder (it/index.html, it/support/index.html, …). GitHub Pages serves the
 files this writes, so commit them together with the sources.
 
@@ -39,6 +40,7 @@ PAGES = {
     "": ("home", "title", "description", "og_description"),
     "support/": ("support", "support_title", "support_description", "support_description"),
     "privacy/": ("privacy", "policy_title", "policy_description", "policy_description"),
+    "guide/": ("guide", "guide_title", "guide_description", "guide_description"),
 }
 
 # On the English page, on the first visit only: open the page in the browser's language when it's
@@ -130,6 +132,19 @@ def sitemap():
     return "\n".join(lines) + "\n"
 
 
+def guide(language):
+    """The guide's text in a language, indented to sit in its page, and its table of contents."""
+    text = (ROOT / "src" / "guide" / f"{language}.html").read_text(encoding="utf-8")
+    headings = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', text)
+    contents = "\n".join([
+        "          <ol>",
+        *(f'            <li><a href="#{anchor}">{title}</a></li>' for anchor, title in headings),
+        "          </ol>",
+    ])
+    content = "\n".join(("        " + line) if line else line for line in text.rstrip("\n").split("\n"))
+    return content, contents
+
+
 def build(language, page, layout, templates, strings):
     template, title_key, description_key, og_description_key = PAGES[page]
     # Relative links: up to the site's root for the stylesheet and images, and up to the
@@ -166,6 +181,10 @@ def build(language, page, layout, templates, strings):
     def fill(text):
         return re.sub(r"\{\{(\w+)(?:\|(\w+))?\}\}", replace, text)
 
+    if template == "guide":
+        content, contents = guide(language)
+        values["guide_content"] = fill(content)
+        values["guide_toc"] = contents
     values["content"] = fill(templates[template])
     result = fill(layout)
     if missing:

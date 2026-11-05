@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guide – HabitTracker</title>
+  <meta name="description" content="How to use HabitTracker: habits and templates, timers, day notes, statistics, reminders, Siri, Apple Watch, iPad and Mac, and your data.">
+  <meta name="theme-color" content="#0088ff">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Guide – HabitTracker">
+  <meta property="og:description" content="How to use HabitTracker: habits and templates, timers, day notes, statistics, reminders, Siri, Apple Watch, iPad and Mac, and your data.">
+  <meta property="og:image" content="https://gas9220.github.io/habitTracker-web/images/en/social.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:url" content="https://gas9220.github.io/habitTracker-web/guide/">
+  <link rel="canonical" href="https://gas9220.github.io/habitTracker-web/guide/">
+  <link rel="alternate" hreflang="en" href="https://gas9220.github.io/habitTracker-web/guide/">
+  <link rel="alternate" hreflang="it" href="https://gas9220.github.io/habitTracker-web/it/guide/">
+  <link rel="alternate" hreflang="fr" href="https://gas9220.github.io/habitTracker-web/fr/guide/">
+  <link rel="alternate" hreflang="es" href="https://gas9220.github.io/habitTracker-web/es/guide/">
+  <link rel="alternate" hreflang="x-default" href="https://gas9220.github.io/habitTracker-web/guide/">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+  <link rel="stylesheet" href="../styles.css">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("language")) return;
+      } catch (error) {
+        return;
+      }
+      var supported = ["it", "fr", "es"];
+      var preferred = navigator.languages || [navigator.language];
+      for (var i = 0; i < preferred.length; i++) {
+        var code = (preferred[i] || "").slice(0, 2).toLowerCase();
+        if (code === "en") return;
+        if (supported.indexOf(code) >= 0) {
+          location.replace("../" + code + "/guide/" + location.hash);
+          return;
+        }
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- Icons used on the page, drawn once and reused with <use>. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/></symbol>
+      <symbol id="i-sunrise" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19h18"/><path d="M7 19a5 5 0 0 1 10 0"/><path d="M12 4v4M5 10.5l1.5 1.5M19 10.5L17.5 12"/></symbol>
+      <symbol id="i-timer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 10v3.5l2.5 2"/><path d="M10 2.5h4"/></symbol>
+      <symbol id="i-quit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 21h4"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M7 16v-5M12 16V6M17 16v-8"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.5 6 .8-4.4 4.1 1.1 6L12 16.6l-5.3 2.8 1.1-6-4.4-4.1 6-.8z"/></symbol>
+      <symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+      <symbol id="i-laptop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2 19.5h20"/></symbol>
+      <symbol id="i-export" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11M7.5 9.5L12 14l4.5-4.5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+      <symbol id="i-person" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+      <symbol id="i-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 6.1A9.6 9.6 0 0 1 12 6c5 0 9 6 9 6a16 16 0 0 1-2.5 3.1M6.6 6.6C4.4 8.2 3 12 3 12s4 6 9 6a8.8 8.8 0 0 0 4.4-1.2"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2" width="11" height="20" rx="2.5"/><path d="M11 18h2"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></symbol>
+      <symbol id="i-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h7M9 17h4"/></symbol>
+      <symbol id="i-access" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.5"/><path d="M5 8.5l7 1.5 7-1.5"/><path d="M12 10v4.5M12 14.5l-3.5 6M12 14.5l3.5 6"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10l5 5 5-5"/></symbol>
+      <symbol id="i-tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../#top">
+        <img src="../images/app-icon.png" alt="" width="32" height="32">
+        HabitTracker
+      </a>
+      <div class="header-end">
+        <nav class="site-nav" aria-label="Main">
+          <a href="../#features">Features</a>
+          <a href="../#screenshots">Screenshots</a>
+          <a href="../#watch">Apple Watch</a>
+          <a href="../#mac">Mac</a>
+          <a href="../#privacy">Privacy</a>
+          <a href="../#contact">Contact</a>
+        </nav>
+        <details class="language-menu">
+          <summary aria-label="Language: English">
+            <svg class="globe" aria-hidden="true"><use href="#i-globe"/></svg>
+            <span>English</span>
+            <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </summary>
+          <ul>
+            <li><a href="../guide/" hreflang="en" lang="en" data-language="en" aria-current="page">English<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+            <li><a href="../it/guide/" hreflang="it" lang="it" data-language="it">Italiano<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+            <li><a href="../fr/guide/" hreflang="fr" lang="fr" data-language="fr">Français<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+            <li><a href="../es/guide/" hreflang="es" lang="es" data-language="es">Español<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- MARK: Guide -->
+    <section class="page">
+      <div class="container prose guide">
+        <span class="eyebrow">Guide</span>
+        <h1>How HabitTracker works</h1>
+        <p class="lead">Everything the app does, and where to find it, from your first habit to the Mac's menu bar.</p>
+        <p class="guide-download">
+          <!-- Written by make-guide-pdfs.sh from this page: run it again after changing the guide. -->
+          <a class="button" href="habittracker-guide.pdf" download="HabitTracker Guide.pdf">
+            <svg width="20" height="20" aria-hidden="true"><use href="#i-export"/></svg>
+            Download PDF
+          </a>
+        </p>
+        <nav class="guide-contents" aria-label="Contents">
+          <h2>Contents</h2>
+          <ol>
+            <li><a href="#start">Getting started</a></li>
+            <li><a href="#today">Your day</a></li>
+            <li><a href="#timers">Timers</a></li>
+            <li><a href="#quitting">Habits to quit</a></li>
+            <li><a href="#notes">Day notes</a></li>
+            <li><a href="#days">Past days, pauses and vacations</a></li>
+            <li><a href="#statistics">Statistics</a></li>
+            <li><a href="#reminders">Reminders and the weekly summary</a></li>
+            <li><a href="#siri">Siri, Shortcuts and the Home Screen</a></li>
+            <li><a href="#watch">Apple Watch</a></li>
+            <li><a href="#mac">iPad and Mac</a></li>
+            <li><a href="#settings">Settings and your data</a></li>
+          </ol>
+        </nav>
+        <!-- Each language's text is in src/guide/<lang>.html. -->
+        <h2 id="start">Getting started</h2>
+        <p>Tap <strong>+</strong> to add a habit. Give it a name and an icon, with a color, a style and an animation, or tap <strong>Start from a Template</strong> to fill everything in from a ready-made habit, like Drink Water or Meditate. You can change anything afterwards.</p>
+        <ul>
+          <li><strong>Type</strong>: <strong>Build</strong> a habit you want to keep, or <strong>Quit</strong> one you want to leave behind. It's chosen once, when you create the habit.</li>
+          <li><strong>Goal</strong>: count <strong>Times</strong>, like 8 glasses of water a day, or <strong>Minutes</strong>, like reading 30 minutes a day, which gives the habit a timer. Also chosen once.</li>
+          <li><strong>Repeat</strong>: on the weekdays you choose (<strong>On Days</strong>), or on any days, a number of <strong>Times a Week</strong>.</li>
+          <li><strong>Time of Day</strong> (Morning, Afternoon, Evening or Any Time) groups your day, and <strong>Priority</strong> puts what matters first.</li>
+          <li>A <strong>Reminder</strong>, a <strong>Location</strong> to open in Maps, and start and end dates for a habit that only lasts a while.</li>
+        </ul>
+
+        <h2 id="today">Your day</h2>
+        <p>The habit list shows what's due <strong>Today</strong>, with how many are done, grouped by time of day once a habit has one. Below come the habits you're quitting, the ones for other days, the paused ones, those still to start and those that have ended.</p>
+        <ul>
+          <li>Tap a habit's circle to check in. Each tap counts one, up to the day's goal.</li>
+          <li>Swipe right for <strong>Undo Check-In</strong> or <strong>Skip Today</strong>, which excuses one day, like a sick day, without breaking your streak.</li>
+          <li>Swipe left to write a <strong>Day Note</strong> or to delete the habit. Touch and hold a habit for all its actions, like <strong>Edit Habit</strong> and <strong>Share Streak</strong>.</li>
+          <li>Tap <strong>Edit</strong> to drag your habits into the order you like.</li>
+        </ul>
+        <p>When a streak reaches 7, 30 or 100 days, the app celebrates it, and <strong>Share Streak</strong> makes a picture of it to send.</p>
+
+        <h2 id="timers">Timers</h2>
+        <p>A habit measured in minutes has a play button instead of a circle. Starting it opens the timer: a ring counting down to the day's goal, <strong>+5 min</strong> if you started without it, and <strong>Reset</strong>. The timer keeps running when you close the app, stops by itself at the goal, and a notification tells you when it's done.</p>
+        <ul>
+          <li>While it runs, it's on the <strong>Lock Screen</strong> and in the <strong>Dynamic Island</strong>, with a button to pause it.</li>
+          <li>Add the <strong>Habit Timer</strong> control to Control Center, the Lock Screen or the Action button, to start or pause a timer without opening the app. Set to <strong>Next Timer</strong>, it starts today's first timer still to do.</li>
+          <li>Several habits can each have a timer running.</li>
+        </ul>
+
+        <h2 id="quitting">Habits to quit</h2>
+        <p>A habit to quit counts the days clean since your last slip. If you slip, swipe right on it and choose <strong>Log a Slip</strong>; <strong>Undo Slip</strong> takes it back. In statistics, a day without a slip counts as done.</p>
+
+        <h2 id="notes">Day notes</h2>
+        <p>Add a mood, from five faces, and a few words to any day of a habit: swipe left on it, use the button in its timer, or touch and hold a day in its history. Your notes are in the habit's history and on its statistics page, and in the CSV export.</p>
+
+        <h2 id="days">Past days, pauses and vacations</h2>
+        <ul>
+          <li>Forgot to check in? Open the habit and use its <strong>History</strong>: tap a day to add a check-in, or a completed day to clear it.</li>
+          <li>Pause a habit in its editor, from one date until another. Paused days aren't missed, so your streaks carry on.</li>
+          <li>Going away? <strong>Settings › Vacation › Pause All Habits…</strong> pauses every habit at once.</li>
+        </ul>
+
+        <h2 id="statistics">Statistics</h2>
+        <p>The Statistics tab shows the week, the month or the year, for every habit or just one: your completion rate and check-ins compared with the period before, perfect days and your current streak; highlights like your most consistent habit and your best weekday; and charts, with a 16-week heatmap. Only finished days count, so today is never missed while there's still time.</p>
+        <p>Tap a habit in the Habits card to see its year: its streaks, a calendar of every day, its notes, and how it went by month and by weekday. With VoiceOver, Audio Graphs play each chart as sound.</p>
+
+        <h2 id="reminders">Reminders and the weekly summary</h2>
+        <p>Turn on a habit's <strong>Reminder</strong> at the time you choose. A habit you do several times a day can spread its reminders through the day, one for each check-in. Each notification has a button to check in without opening the app. In Settings, the <strong>Weekly Summary</strong> tells you at the end of each week how it went.</p>
+
+        <h2 id="siri">Siri, Shortcuts and the Home Screen</h2>
+        <ul>
+          <li>Ask Siri “Check in Morning Run in HabitTracker”, “Start the Read timer in HabitTracker”, or “What's left today in HabitTracker”. The same actions are in Spotlight and the Shortcuts app, and you can put them on the Action button.</li>
+          <li>Touch and hold the app's icon on the Home Screen for <strong>New Habit</strong> and today's timers.</li>
+        </ul>
+
+        <h2 id="watch">Apple Watch</h2>
+        <p>The watch app shows today's habits, all your habits and your statistics, and stays in sync with your iPhone. Tap a habit to check in, or to start its timer. Open it to set the count with the Digital Crown, mark it done, skip the day or log a slip. Streak milestones are celebrated on your wrist too.</p>
+
+        <h2 id="mac">iPad and Mac</h2>
+        <p>On iPad and Mac, your habits are in a sidebar, with Statistics on top and the selected habit's statistics beside them. On the Mac:</p>
+        <ul>
+          <li>Today's habits are in the menu bar, to check in or run a timer even with the window closed. Turn on <strong>Open at Login</strong> in Settings to have them there as soon as you log in.</li>
+          <li>File › New Habit (⌘N), HabitTracker › Settings… (⌘,), and the Habit menu for the habit selected in the sidebar: check in (⌘K), edit (⌘E), skip, write a day note and more. Press ⌫ to delete it.</li>
+          <li>Right-click a habit for all its actions, and drag it to change the order.</li>
+          <li>Edit › Undo and Redo (⌘Z and ⇧⌘Z) for check-ins, skips and deletions.</li>
+          <li>The Dock icon's menu has New Habit and today's timers.</li>
+        </ul>
+
+        <h2 id="settings">Settings and your data</h2>
+        <ul>
+          <li><strong>Language</strong>: English, Italiano, Français or Español, or your device's language.</li>
+          <li><strong>App Icon</strong>: seven icons to choose from.</li>
+          <li><strong>Export as CSV</strong> for a spreadsheet: your habits, check-ins and notes.</li>
+          <li><strong>Back Up to Files</strong> saves every habit in one file, and <strong>Restore from Backup</strong> puts them back, on this device or another one. Your habits stay on your device, and deleting the app deletes them, so keep a backup somewhere safe.</li>
+          <li><strong>Contact Support</strong> opens an email to us, with the app's details but none of your habits.</li>
+        </ul>
+        <p class="section-more"><a href="../support/">More questions? Visit Support</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© 2026 HabitTracker</span>
+      <nav aria-label="Footer">
+        <a href="../#features">Features</a>
+        <a href="../guide/">Guide</a>
+        <a href="../support/">Support</a>
+        <a href="../privacy/">Privacy Policy</a>
+      </nav>
+      <span>Apple, Apple Watch, iPhone, iPad and Mac are trademarks of Apple Inc.</span>
+    </div>
+  </footer>
+
+  <script>
+    // The language menu: closes on a click outside it or on Escape, keeps the section you're
+    // reading when you switch, and remembers the choice so the English page stops redirecting.
+    (function () {
+      var menu = document.querySelector(".language-menu");
+      document.addEventListener("click", function (event) {
+        if (menu.open && !menu.contains(event.target)) menu.open = false;
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && menu.open) {
+          menu.open = false;
+          menu.querySelector("summary").focus();
+        }
+      });
+      menu.querySelectorAll("a[data-language]").forEach(function (link) {
+        link.addEventListener("click", function () {
+          try { localStorage.setItem("language", link.dataset.language); } catch (error) {}
+          link.href = link.href.split("#")[0] + location.hash;
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

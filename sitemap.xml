@@ -96,4 +96,36 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://gas9220.github.io/habitTracker-web/es/privacy/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://gas9220.github.io/habitTracker-web/privacy/"/>
   </url>
+  <url>
+    <loc>https://gas9220.github.io/habitTracker-web/guide/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gas9220.github.io/habitTracker-web/guide/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gas9220.github.io/habitTracker-web/it/guide/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gas9220.github.io/habitTracker-web/fr/guide/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gas9220.github.io/habitTracker-web/es/guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gas9220.github.io/habitTracker-web/guide/"/>
+  </url>
+  <url>
+    <loc>https://gas9220.github.io/habitTracker-web/it/guide/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gas9220.github.io/habitTracker-web/guide/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gas9220.github.io/habitTracker-web/it/guide/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gas9220.github.io/habitTracker-web/fr/guide/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gas9220.github.io/habitTracker-web/es/guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gas9220.github.io/habitTracker-web/guide/"/>
+  </url>
+  <url>
+    <loc>https://gas9220.github.io/habitTracker-web/fr/guide/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gas9220.github.io/habitTracker-web/guide/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gas9220.github.io/habitTracker-web/it/guide/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gas9220.github.io/habitTracker-web/fr/guide/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gas9220.github.io/habitTracker-web/es/guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gas9220.github.io/habitTracker-web/guide/"/>
+  </url>
+  <url>
+    <loc>https://gas9220.github.io/habitTracker-web/es/guide/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gas9220.github.io/habitTracker-web/guide/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gas9220.github.io/habitTracker-web/it/guide/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gas9220.github.io/habitTracker-web/fr/guide/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gas9220.github.io/habitTracker-web/es/guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gas9220.github.io/habitTracker-web/guide/"/>
+  </url>
 </urlset>

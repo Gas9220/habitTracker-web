@@ -8,12 +8,14 @@ The website of HabitTracker, the habit tracker for iPhone, iPad, Mac and Apple W
 
 ```
 src/layout.html        The head, header and footer every page shares, with {{key}} where each language's text goes
-src/pages/             Each page's content: home, support (questions and answers, contact) and privacy (the policy)
+src/pages/             Each page's content: home, support (questions and answers, contact), privacy (the policy) and guide
+src/guide/<lang>.html  The guide's text in each language: long, so in files of its own rather than strings
 src/strings/<lang>.json  The text in each language: en, it, fr, es
 build.py               Writes the pages from those, and sitemap.xml with every page in every language
 make-social-images.swift  Draws images/<lang>/social.jpg, the picture shown with links to the site
-index.html             English, the home page (generated), with support/ and privacy/ beside it
-it/, fr/, es/          The other languages' pages, the same three in each (generated)
+make-guide-pdfs.sh     Prints each language's guide to its guide/habittracker-guide.pdf
+index.html             English, the home page (generated), with support/, privacy/ and guide/ beside it
+it/, fr/, es/          The other languages' pages, the same four in each (generated)
 styles.css             Styles, with dark mode (prefers-color-scheme) and layouts for phones
 images/                The app icon (app-icon, apple-touch-icon, favicon)
 images/<lang>/         The screenshots in each language, resized for the web, and social.jpg
@@ -21,7 +23,7 @@ images/<lang>/         The screenshots in each language, resized for the web, an
 
 ## Changing the text or the page
 
-Edit `src/layout.html`, `src/pages/*.html` or `src/strings/*.json`, never the generated `index.html` files, then run:
+Edit `src/layout.html`, `src/pages/*.html`, `src/guide/*.html` or `src/strings/*.json`, never the generated `index.html` files, then run:
 
 ```bash
 python3 build.py
@@ -30,6 +32,19 @@ python3 build.py
 and commit the sources together with the pages it writes. A key missing from a language, or one the page doesn't use, stops the build. Strings can contain HTML (`<br>`, `<span class="accent">`); `{{key|attr}}` in the template escapes a string for an attribute, like an `alt` text.
 
 Each language uses the app's own words, from its string catalog: Italian keeps "check-in", French says "valider" and "vous", Spanish "registrar" and "tú"; a streak is "serie", "série", "racha"; menus are named as the app names them (Impostazioni › Assistenza, Réglages › Assistance, Ajustes › Soporte).
+
+## The guide
+
+`guide/` explains every feature, written from the app's CLAUDE.md, and names each button and setting in the words the app uses for it in each language (its string catalog), so what the guide says is what's on screen. When a feature ships or changes, change the guide with it, in all four files of `src/guide/`. `build.py` makes the table of contents from their `<h2 id="…">` headings.
+
+The Download PDF button saves a PDF printed from the page itself, with Chrome or Edge, so print them again after any change:
+
+```bash
+python3 build.py
+./make-guide-pdfs.sh
+```
+
+The print styles at the end of `styles.css` decide how they look: A4, the brand on top, without the menus, the footer or the button.
 
 ## Languages
 

@@ -175,5 +175,16 @@
   "policy_contact_text": "Questions about your privacy? Write to us:",
 
   "footer_label": "Footer",
-  "footer_trademarks": "Apple, Apple Watch, iPhone, iPad and Mac are trademarks of Apple Inc."
+  "footer_trademarks": "Apple, Apple Watch, iPhone, iPad and Mac are trademarks of Apple Inc.",
+
+  "nav_guide": "Guide",
+  "guide_title": "Guide – HabitTracker",
+  "guide_description": "How to use HabitTracker: habits and templates, timers, day notes, statistics, reminders, Siri, Apple Watch, iPad and Mac, and your data.",
+  "guide_heading": "How HabitTracker works",
+  "guide_lead": "Everything the app does, and where to find it, from your first habit to the Mac's menu bar.",
+  "guide_download": "Download PDF",
+  "guide_pdf_name": "HabitTracker Guide.pdf",
+  "guide_contents": "Contents",
+  "guide_more": "More questions? Visit Support",
+  "guide_link": "Every feature, explained in the guide"
 }
