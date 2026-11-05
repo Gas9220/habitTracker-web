@@ -14,6 +14,7 @@ src/strings/<lang>.json  The text in each language: en, it, fr, es
 build.py               Writes the pages from those, and sitemap.xml with every page in every language
 make-social-images.swift  Draws images/<lang>/social.jpg, the picture shown with links to the site
 make-guide-pdfs.sh     Prints each language's guide to its guide/habittracker-guide.pdf
+src/404.html           The page for an address that doesn't exist: one page, whose script picks the language
 index.html             English, the home page (generated), with support/, privacy/ and guide/ beside it
 it/, fr/, es/          The other languages' pages, the same four in each (generated)
 styles.css             Styles, with dark mode (prefers-color-scheme) and layouts for phones
@@ -66,7 +67,7 @@ The screens, in order: the habit list, Statistics, its charts (scrolled to the h
 - The Lock Screen is Notification Center, pulled down over the Home Screen: it looks the same and shows the timer's Live Activity, but with the phone unlocked. Locked, the simulator draws the countdown without its seconds ("9:––"), however the screen is woken. Its clock is the real time, since any `--time` override freezes the countdown too, and its date and Control Center are drawn by the system in the simulator's own language: for each language, set the simulator's first (`AppleLanguages` and `AppleLocale` in its `.GlobalPreferences.plist`, then a reboot). A timer's first Live Activity asks to be allowed, and later whether to keep allowing them: Allow, then Always Allow.
 - Control Center has the Habit Timer control, added by hand once (set to Next Timer, two columns wide so its name shows); the simulator's Control Center has nothing else.
 
-The Mac's, in `../assets/screenshots/<lang>/mac/`, are the window on Read 20 Pages' statistics and the menu bar's panel, drawn by the app itself in a light appearance by a temporary hook (as the app's CLAUDE.md describes for looking at a Mac view), so the window has no shadow or desktop around it. macOS 26's glass doesn't draw that way: the sidebar's list is drawn on its own and put in its place, and the glass behind it and behind the panel comes out transparent, so it's filled with light gray (`#F2F2F5` and `#F7F7F9`), as it looks on a light desktop.
+The Mac's, in `../assets/screenshots/<lang>/mac/`, are the window on Read 20 Pages' statistics and the menu bar's panel, drawn by the app itself in a light appearance by a temporary hook (as the app's CLAUDE.md describes for looking at a Mac view), so the window has no shadow or desktop around it. macOS 26's glass doesn't draw that way: the sidebar's list is drawn on its own and put in its place, and the glass behind it and behind the panel comes out transparent, so it's filled with light gray (`#F2F2F5` and `#F7F7F9`), as it looks on a light desktop. Drawn this way, some colors in the sidebar's list are wrong: progress arcs and tinted icons come out white, and so does the selected habit's check-in circle. That's the capture, not the app; a real screenshot would be more faithful.
 
 The copies in `images/<lang>/` are the iPhone screenshots at half size (660 × 1434), the watch screenshots as they are, and the Mac's window 1100 wide (`mac-window.png`) and panel 360 wide (`mac-menu-bar.png`):
 

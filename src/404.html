@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0088ff">
+  <title>{{not_found_title}} – HabitTracker</title>
+  <!-- GitHub Pages shows this one page for any address that doesn't exist, at any depth, so its links start from the site's root. -->
+  <base href="{{site_path}}">
+  <script>
+    // In a local preview the site is at the server's root.
+    if (location.pathname.indexOf({{site_path_json}}) !== 0) {
+      document.querySelector("base").href = "/";
+    }
+  </script>
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="not-found">
+    <a href="./"><img src="images/app-icon.png" alt="HabitTracker" width="96" height="96"></a>
+    <h1 id="not-found-title">{{not_found_title}}</h1>
+    <p id="not-found-text">{{not_found_text}}</p>
+    <a class="button" id="not-found-button" href="./">{{not_found_button}}</a>
+  </main>
+
+  <script>
+    // The language of the address it was asked for, then the one chosen in the site's menu, then
+    // the browser's.
+    (function () {
+      var texts = {{texts}};
+      var root = document.querySelector("base").getAttribute("href");
+      var language = location.pathname.slice(root.length).split("/")[0];
+      if (!texts[language]) {
+        try { language = localStorage.getItem("language"); } catch (error) { language = null; }
+      }
+      if (!texts[language]) {
+        var preferred = navigator.languages || [navigator.language];
+        language = preferred.map(function (code) { return (code || "").slice(0, 2).toLowerCase(); })
+          .filter(function (code) { return texts[code]; })[0] || "en";
+      }
+      var text = texts[language];
+      document.documentElement.lang = language;
+      document.title = text.title + " – HabitTracker";
+      document.getElementById("not-found-title").textContent = text.title;
+      document.getElementById("not-found-text").textContent = text.text;
+      var button = document.getElementById("not-found-button");
+      button.textContent = text.button;
+      if (language !== "en") button.href = language + "/";
+    })();
+  </script>
+</body>
+</html>

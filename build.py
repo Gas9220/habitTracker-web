@@ -20,6 +20,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).parent
 BASE_URL = "https://gas9220.github.io/habitTracker-web/"
@@ -192,6 +193,24 @@ def build(language, page, layout, templates, strings):
     return result
 
 
+def not_found(all_strings):
+    """The page GitHub Pages shows for an address that doesn't exist. There's only one, whatever
+    the language, so it carries all four and a script picks one."""
+    template = (ROOT / "src" / "404.html").read_text(encoding="utf-8")
+    texts = {
+        language: {key: strings[f"not_found_{key}"] for key in ("title", "text", "button")}
+        for language, strings in all_strings.items()
+    }
+    site_path = urlsplit(BASE_URL).path
+    values = {
+        "site_path": site_path,
+        "site_path_json": json.dumps(site_path),
+        "texts": json.dumps(texts, ensure_ascii=False),
+        **{f"not_found_{key}": value for key, value in texts[DEFAULT].items()},
+    }
+    return re.sub(r"\{\{(\w+)\}\}", lambda match: values[match.group(1)], template)
+
+
 def main():
     layout = (ROOT / "src" / "layout.html").read_text(encoding="utf-8")
     templates = {
@@ -199,7 +218,9 @@ def main():
         for template, *_ in PAGES.values()
     }
     used = set(re.findall(r"\{\{(\w+)", layout + "".join(templates.values())))
-    used |= {"language_label"} | {key for _, *keys in PAGES.values() for key in keys}
+    used |= {"language_label", "not_found_title", "not_found_text", "not_found_button"}
+    used |= {key for _, *keys in PAGES.values() for key in keys}
+    all_strings = {}
     english = json.loads((ROOT / "src" / "strings" / "en.json").read_text(encoding="utf-8"))
 
     for language in LANGUAGES:
@@ -210,6 +231,7 @@ def main():
         unused = set(strings) - used
         if unused:
             sys.exit(f"{language}: keys the pages don't use: {', '.join(sorted(unused))}")
+        all_strings[language] = strings
 
         for page in PAGES:
             output = ROOT / folder(language) / page / "index.html"
@@ -219,6 +241,8 @@ def main():
 
     (ROOT / "sitemap.xml").write_text(sitemap(), encoding="utf-8")
     print("wrote sitemap.xml")
+    (ROOT / "404.html").write_text(not_found(all_strings), encoding="utf-8")
+    print("wrote 404.html")
 
 
 if __name__ == "__main__":

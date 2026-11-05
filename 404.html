@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0088ff">
+  <title>Page not found – HabitTracker</title>
+  <!-- GitHub Pages shows this one page for any address that doesn't exist, at any depth, so its links start from the site's root. -->
+  <base href="/habitTracker-web/">
+  <script>
+    // In a local preview the site is at the server's root.
+    if (location.pathname.indexOf("/habitTracker-web/") !== 0) {
+      document.querySelector("base").href = "/";
+    }
+  </script>
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="not-found">
+    <a href="./"><img src="images/app-icon.png" alt="HabitTracker" width="96" height="96"></a>
+    <h1 id="not-found-title">Page not found</h1>
+    <p id="not-found-text">This page doesn't exist, or it has moved.</p>
+    <a class="button" id="not-found-button" href="./">Go to the home page</a>
+  </main>
+
+  <script>
+    // The language of the address it was asked for, then the one chosen in the site's menu, then
+    // the browser's.
+    (function () {
+      var texts = {"en": {"title": "Page not found", "text": "This page doesn't exist, or it has moved.", "button": "Go to the home page"}, "it": {"title": "Pagina non trovata", "text": "Questa pagina non esiste, o è stata spostata.", "button": "Vai alla home page"}, "fr": {"title": "Page introuvable", "text": "Cette page n'existe pas, ou elle a été déplacée.", "button": "Aller à la page d'accueil"}, "es": {"title": "Página no encontrada", "text": "Esta página no existe, o se ha movido.", "button": "Ir a la página de inicio"}};
+      var root = document.querySelector("base").getAttribute("href");
+      var language = location.pathname.slice(root.length).split("/")[0];
+      if (!texts[language]) {
+        try { language = localStorage.getItem("language"); } catch (error) { language = null; }
+      }
+      if (!texts[language]) {
+        var preferred = navigator.languages || [navigator.language];
+        language = preferred.map(function (code) { return (code || "").slice(0, 2).toLowerCase(); })
+          .filter(function (code) { return texts[code]; })[0] || "en";
+      }
+      var text = texts[language];
+      document.documentElement.lang = language;
+      document.title = text.title + " – HabitTracker";
+      document.getElementById("not-found-title").textContent = text.title;
+      document.getElementById("not-found-text").textContent = text.text;
+      var button = document.getElementById("not-found-button");
+      button.textContent = text.button;
+      if (language !== "en") button.href = language + "/";
+    })();
+  </script>
+</body>
+</html>

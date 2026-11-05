@@ -186,5 +186,9 @@
   "guide_pdf_name": "HabitTracker Guide.pdf",
   "guide_contents": "Contents",
   "guide_more": "More questions? Visit Support",
-  "guide_link": "Every feature, explained in the guide"
+  "guide_link": "Every feature, explained in the guide",
+
+  "not_found_title": "Page not found",
+  "not_found_text": "This page doesn't exist, or it has moved.",
+  "not_found_button": "Go to the home page"
 }

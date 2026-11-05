@@ -186,5 +186,9 @@
   "guide_pdf_name": "Guía de HabitTracker.pdf",
   "guide_contents": "Índice",
   "guide_more": "¿Más preguntas? Visita Soporte",
-  "guide_link": "Cada función, explicada en la guía"
+  "guide_link": "Cada función, explicada en la guía",
+
+  "not_found_title": "Página no encontrada",
+  "not_found_text": "Esta página no existe, o se ha movido.",
+  "not_found_button": "Ir a la página de inicio"
 }
