@@ -699,6 +699,57 @@ section {
   color: var(--text-2);
 }
 
+/* MARK: Pages */
+
+/* Support and the privacy policy, each a page of its own under the header. */
+.page {
+  padding-top: 72px;
+}
+
+.section-head h1 {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 700;
+}
+
+/* A link to the page with more, under a section. */
+.section-more {
+  text-align: center;
+  margin: 32px 0 0;
+  font-weight: 600;
+}
+
+/* The privacy policy: text at a comfortable reading width. */
+.prose {
+  max-width: 720px;
+}
+
+.prose h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+}
+
+.prose .updated {
+  color: var(--text-2);
+  font-size: 15px;
+  margin: 8px 0 24px;
+}
+
+.prose .lead {
+  font-size: 20px;
+  margin: 0;
+}
+
+.prose h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 36px 0 8px;
+}
+
+.prose p {
+  color: var(--text-2);
+  margin: 0;
+}
+
 /* MARK: Small screens */
 
 /* Section links in some languages are long: below this width the header keeps the language menu only. */

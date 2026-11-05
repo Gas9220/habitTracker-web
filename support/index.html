@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Support – HabitTracker</title>
+  <meta name="description" content="Help with HabitTracker: answers to common questions, and how to contact us.">
+  <meta name="theme-color" content="#0088ff">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Support – HabitTracker">
+  <meta property="og:description" content="Help with HabitTracker: answers to common questions, and how to contact us.">
+  <meta property="og:image" content="https://gas9220.github.io/habitTracker-web/images/app-icon.png">
+  <meta property="og:url" content="https://gas9220.github.io/habitTracker-web/support/">
+  <link rel="canonical" href="https://gas9220.github.io/habitTracker-web/support/">
+  <link rel="alternate" hreflang="en" href="https://gas9220.github.io/habitTracker-web/support/">
+  <link rel="alternate" hreflang="it" href="https://gas9220.github.io/habitTracker-web/it/support/">
+  <link rel="alternate" hreflang="fr" href="https://gas9220.github.io/habitTracker-web/fr/support/">
+  <link rel="alternate" hreflang="es" href="https://gas9220.github.io/habitTracker-web/es/support/">
+  <link rel="alternate" hreflang="x-default" href="https://gas9220.github.io/habitTracker-web/support/">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+  <link rel="stylesheet" href="../styles.css">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("language")) return;
+      } catch (error) {
+        return;
+      }
+      var supported = ["it", "fr", "es"];
+      var preferred = navigator.languages || [navigator.language];
+      for (var i = 0; i < preferred.length; i++) {
+        var code = (preferred[i] || "").slice(0, 2).toLowerCase();
+        if (code === "en") return;
+        if (supported.indexOf(code) >= 0) {
+          location.replace("../" + code + "/support/" + location.hash);
+          return;
+        }
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- Icons used on the page, drawn once and reused with <use>. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/></symbol>
+      <symbol id="i-sunrise" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19h18"/><path d="M7 19a5 5 0 0 1 10 0"/><path d="M12 4v4M5 10.5l1.5 1.5M19 10.5L17.5 12"/></symbol>
+      <symbol id="i-timer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 10v3.5l2.5 2"/><path d="M10 2.5h4"/></symbol>
+      <symbol id="i-quit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 21h4"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M7 16v-5M12 16V6M17 16v-8"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.5 6 .8-4.4 4.1 1.1 6L12 16.6l-5.3 2.8 1.1-6-4.4-4.1 6-.8z"/></symbol>
+      <symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+      <symbol id="i-laptop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2 19.5h20"/></symbol>
+      <symbol id="i-export" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11M7.5 9.5L12 14l4.5-4.5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+      <symbol id="i-person" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+      <symbol id="i-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 6.1A9.6 9.6 0 0 1 12 6c5 0 9 6 9 6a16 16 0 0 1-2.5 3.1M6.6 6.6C4.4 8.2 3 12 3 12s4 6 9 6a8.8 8.8 0 0 0 4.4-1.2"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2" width="11" height="20" rx="2.5"/><path d="M11 18h2"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10l5 5 5-5"/></symbol>
+      <symbol id="i-tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../#top">
+        <img src="../images/app-icon.png" alt="" width="32" height="32">
+        HabitTracker
+      </a>
+      <div class="header-end">
+        <nav class="site-nav" aria-label="Main">
+          <a href="../#features">Features</a>
+          <a href="../#screenshots">Screenshots</a>
+          <a href="../#watch">Apple Watch</a>
+          <a href="../#privacy">Privacy</a>
+          <a href="../#contact">Contact</a>
+        </nav>
+        <details class="language-menu">
+          <summary aria-label="Language: English">
+            <svg class="globe" aria-hidden="true"><use href="#i-globe"/></svg>
+            <span>English</span>
+            <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </summary>
+          <ul>
+            <li><a href="../support/" hreflang="en" lang="en" data-language="en" aria-current="page">English<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+            <li><a href="../it/support/" hreflang="it" lang="it" data-language="it">Italiano<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+            <li><a href="../fr/support/" hreflang="fr" lang="fr" data-language="fr">Français<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+            <li><a href="../es/support/" hreflang="es" lang="es" data-language="es">Español<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- MARK: Support -->
+    <section class="page">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Support</span>
+          <h1>How can we help?</h1>
+          <p>Answers to common questions about HabitTracker, and how to reach us.</p>
+        </div>
+        <div class="contact-card">
+          <h2>Contact support</h2>
+          <p>Questions, ideas, or something that doesn't work as it should? Write to us. From the app, Settings › Support › Contact Support adds the details that help us find a problem.</p>
+          <div class="actions">
+            <!-- Placeholder address, the same as AppInfo.supportEmail in the app: replace both before release. -->
+            <a class="button" href="mailto:support@example.com?subject=HabitTracker">
+              <svg width="20" height="20" aria-hidden="true"><use href="#i-mail"/></svg>
+              Email support
+            </a>
+          </div>
+          <p class="email"><a href="mailto:support@example.com?subject=HabitTracker">support@example.com</a></p>
+
+          <div class="faq">
+            <details>
+              <summary>When can I download HabitTracker?</summary>
+              <p>It's almost ready: a beta on TestFlight comes first, then the App Store. This page will link to it as soon as it's out.</p>
+            </details>
+            <details>
+              <summary>Which devices does it run on?</summary>
+              <p>iPhone and iPad with iOS 26 or later, Mac with macOS 26 or later, and Apple Watch with watchOS 26 or later, paired with an iPhone.</p>
+            </details>
+            <details>
+              <summary>Why don't my reminders arrive?</summary>
+              <p>Check that HabitTracker may send notifications: Settings › Notifications in the app shows it, and opens the system's settings if needed. Then check, when editing the habit, that it has a reminder. A habit that's paused, skipped or already done for the day gets no reminder.</p>
+            </details>
+            <details>
+              <summary>Why doesn't my Apple Watch show my habits?</summary>
+              <p>The watch gets your habits from your iPhone, so open HabitTracker on the iPhone once, with the watch nearby. From then on the watch works on its own, and sends what you do there as soon as the two are back in reach.</p>
+            </details>
+            <details>
+              <summary>Can I skip a day without losing my streak?</summary>
+              <p>Yes. Swipe a habit and choose Skip Today, turn on Paused when editing a habit, or use Settings › Vacation to pause all of them. Paused days never count as missed.</p>
+            </details>
+            <details>
+              <summary>How do I move my habits to a new iPhone?</summary>
+              <p>In Settings › Backup, choose Back Up to Files and save the file somewhere you can reach from the new iPhone, like iCloud Drive. Then, on the new iPhone, choose Restore from Backup.</p>
+            </details>
+            <details>
+              <summary>Can I contact support from the app?</summary>
+              <p>Yes: Settings › Support › Contact Support writes an email with details that help us find a problem, like the app version, your device and iOS version. It never includes your habits' names, notes or places, and you see everything before you send it.</p>
+            </details>
+            <details>
+              <summary>How do I delete my data?</summary>
+              <p>Everything is on your devices. Delete a habit to remove it with its history, or delete the app to remove all of it. Backups and exports you saved stay where you saved them until you delete them.</p>
+            </details>
+          </div>
+          <p class="section-more"><a href="../privacy/">Read the privacy policy</a></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© 2026 HabitTracker</span>
+      <nav aria-label="Footer">
+        <a href="../#features">Features</a>
+        <a href="../support/">Support</a>
+        <a href="../privacy/">Privacy Policy</a>
+      </nav>
+      <span>Apple, Apple Watch, iPhone, iPad and Mac are trademarks of Apple Inc.</span>
+    </div>
+  </footer>
+
+  <script>
+    // The language menu: closes on a click outside it or on Escape, keeps the section you're
+    // reading when you switch, and remembers the choice so the English page stops redirecting.
+    (function () {
+      var menu = document.querySelector(".language-menu");
+      document.addEventListener("click", function (event) {
+        if (menu.open && !menu.contains(event.target)) menu.open = false;
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && menu.open) {
+          menu.open = false;
+          menu.querySelector("summary").focus();
+        }
+      });
+      menu.querySelectorAll("a[data-language]").forEach(function (link) {
+        link.addEventListener("click", function () {
+          try { localStorage.setItem("language", link.dataset.language); } catch (error) {}
+          link.href = link.href.split("#")[0] + location.hash;
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

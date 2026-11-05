@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
-"""Builds the website's pages, one per language, from src/page.html and src/strings/<language>.json.
+"""Builds the website's pages in each language, from src/layout.html, src/pages/<page>.html and
+src/strings/<language>.json.
 
     python3 build.py
 
-English is the root page (index.html), the others are in their own folder (it/index.html, …).
-GitHub Pages serves the files this writes, so commit them together with the sources.
+Each page is src/layout.html (the head, the header and the footer) around its content, from
+src/pages/. English is at the root (index.html, support/index.html, privacy/index.html), the other
+languages in their own folder (it/index.html, it/support/index.html, …). GitHub Pages serves the
+files this writes, so commit them together with the sources.
 
-In the template, {{key}} is replaced by that string as it is (strings may contain HTML, like
+In the templates, {{key}} is replaced by that string as it is (strings may contain HTML, like
 <br> or <strong>), and {{key|attr}} by the string escaped for an HTML attribute (alt texts,
 meta descriptions). A key missing from a language stops the build, so no page is half translated.
 """
@@ -30,6 +33,14 @@ LANGUAGES = {
 }
 DEFAULT = "en"
 
+# The pages, by the path each is served at in its language's folder: its template in src/pages/,
+# then the strings for its title, its description, and its description where it's shared.
+PAGES = {
+    "": ("home", "title", "description", "og_description"),
+    "support/": ("support", "support_title", "support_description", "support_description"),
+    "privacy/": ("privacy", "policy_title", "policy_description", "policy_description"),
+}
+
 # On the English page, on the first visit only: open the page in the browser's language when it's
 # one of the others, as the app follows the device's language. Choosing a language in the menu
 # remembers it, and from then on nothing redirects.
@@ -40,13 +51,13 @@ REDIRECT_SCRIPT = """  <script>
       } catch (error) {
         return;
       }
-      var supported = %s;
+      var supported = %(supported)s;
       var preferred = navigator.languages || [navigator.language];
       for (var i = 0; i < preferred.length; i++) {
         var code = (preferred[i] || "").slice(0, 2).toLowerCase();
         if (code === "en") return;
         if (supported.indexOf(code) >= 0) {
-          location.replace(code + "/" + location.hash);
+          location.replace(%(target)s);
           return;
         }
       }
@@ -58,12 +69,21 @@ def folder(language):
     return "" if language == DEFAULT else language + "/"
 
 
-def language_menu(current, root, strings):
+def redirect_script(root, page):
+    """The redirect to the same page in the browser's language, for the English pages."""
+    target = (f"{json.dumps(root)} + " if root else "") + f'code + "/{page}" + location.hash'
+    return REDIRECT_SCRIPT % {
+        "supported": json.dumps([code for code in LANGUAGES if code != DEFAULT]),
+        "target": target,
+    }
+
+
+def language_menu(current, root, strings, page):
     links = []
     for code, name in LANGUAGES.items():
         selected = code == current
         links.append(
-            f'            <li><a href="{root + folder(code) or "./"}" hreflang="{code}" lang="{code}" data-language="{code}"'
+            f'            <li><a href="{root + folder(code) + page or "./"}" hreflang="{code}" lang="{code}" data-language="{code}"'
             + (' aria-current="page"' if selected else "")
             + f'>{name}<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>'
         )
@@ -81,28 +101,35 @@ def language_menu(current, root, strings):
     ])
 
 
-def alternates():
+def alternates(page):
     lines = [
-        f'  <link rel="alternate" hreflang="{code}" href="{BASE_URL}{folder(code)}">'
+        f'  <link rel="alternate" hreflang="{code}" href="{BASE_URL}{folder(code)}{page}">'
         for code in LANGUAGES
     ]
-    lines.append(f'  <link rel="alternate" hreflang="x-default" href="{BASE_URL}">')
+    lines.append(f'  <link rel="alternate" hreflang="x-default" href="{BASE_URL}{page}">')
     return "\n".join(lines)
 
 
-def build(language, template, strings):
-    root = "" if language == DEFAULT else "../"
+def build(language, page, layout, templates, strings):
+    template, title_key, description_key, og_description_key = PAGES[page]
+    # Relative links: up to the site's root for the stylesheet and images, and up to the
+    # language's home page for its sections.
+    home = "../" * page.count("/")
+    root = ("" if language == DEFAULT else "../") + home
     values = dict(strings)
     values.update({
         "lang": language,
         "root": root,
+        "home": home,
         "images": f"{root}images/{language}/",
         "base_url": BASE_URL,
-        "page_url": BASE_URL + folder(language),
-        "alternates": alternates(),
-        "language_menu": language_menu(language, root, strings),
-        "redirect_script": REDIRECT_SCRIPT % json.dumps([c for c in LANGUAGES if c != DEFAULT])
-        if language == DEFAULT else "",
+        "page_url": BASE_URL + folder(language) + page,
+        "page_title": strings[title_key],
+        "page_description": strings[description_key],
+        "page_og_description": strings[og_description_key],
+        "alternates": alternates(page),
+        "language_menu": language_menu(language, root, strings, page),
+        "redirect_script": redirect_script(root, page) if language == DEFAULT else "",
     })
 
     missing = set()
@@ -116,15 +143,24 @@ def build(language, template, strings):
         # Attributes are in double quotes, so apostrophes can stay as they are.
         return html.escape(value, quote=False).replace('"', "&quot;") if filter_ == "attr" else value
 
-    page = re.sub(r"\{\{(\w+)(?:\|(\w+))?\}\}", replace, template)
+    def fill(text):
+        return re.sub(r"\{\{(\w+)(?:\|(\w+))?\}\}", replace, text)
+
+    values["content"] = fill(templates[template])
+    result = fill(layout)
     if missing:
-        sys.exit(f"{language}: missing {', '.join(sorted(missing))}")
-    return page
+        sys.exit(f"{language} {page or 'home'}: missing {', '.join(sorted(missing))}")
+    return result
 
 
 def main():
-    template = (ROOT / "src" / "page.html").read_text(encoding="utf-8")
-    used = set(re.findall(r"\{\{(\w+)", template)) | {"language_label"}
+    layout = (ROOT / "src" / "layout.html").read_text(encoding="utf-8")
+    templates = {
+        template: (ROOT / "src" / "pages" / f"{template}.html").read_text(encoding="utf-8")
+        for template, *_ in PAGES.values()
+    }
+    used = set(re.findall(r"\{\{(\w+)", layout + "".join(templates.values())))
+    used |= {"language_label"} | {key for _, *keys in PAGES.values() for key in keys}
     english = json.loads((ROOT / "src" / "strings" / "en.json").read_text(encoding="utf-8"))
 
     for language in LANGUAGES:
@@ -134,12 +170,13 @@ def main():
             sys.exit(f"{language}: keys English doesn't have: {', '.join(sorted(extra))}")
         unused = set(strings) - used
         if unused:
-            sys.exit(f"{language}: keys the page doesn't use: {', '.join(sorted(unused))}")
+            sys.exit(f"{language}: keys the pages don't use: {', '.join(sorted(unused))}")
 
-        output = ROOT / folder(language) / "index.html"
-        output.parent.mkdir(exist_ok=True)
-        output.write_text(build(language, template, strings), encoding="utf-8")
-        print(f"wrote {output.relative_to(ROOT)}")
+        for page in PAGES:
+            output = ROOT / folder(language) / page / "index.html"
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(build(language, page, layout, templates, strings), encoding="utf-8")
+            print(f"wrote {output.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

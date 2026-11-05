@@ -7,11 +7,12 @@ The website of HabitTracker, the habit tracker for iPhone, iPad, Mac and Apple W
 ## Files
 
 ```
-src/page.html          The page, with {{key}} where each language's text goes
+src/layout.html        The head, header and footer every page shares, with {{key}} where each language's text goes
+src/pages/             Each page's content: home, support (questions and answers, contact) and privacy (the policy)
 src/strings/<lang>.json  The text in each language: en, it, fr, es
-build.py               Writes the pages from those two
-index.html             English, the root page (generated)
-it/, fr/, es/          The other languages' pages (generated)
+build.py               Writes the pages from those
+index.html             English, the home page (generated), with support/ and privacy/ beside it
+it/, fr/, es/          The other languages' pages, the same three in each (generated)
 styles.css             Styles, with dark mode (prefers-color-scheme) and layouts for phones
 images/                The app icon (app-icon, apple-touch-icon, favicon)
 images/<lang>/         The screenshots in each language, resized for the web
@@ -19,7 +20,7 @@ images/<lang>/         The screenshots in each language, resized for the web
 
 ## Changing the text or the page
 
-Edit `src/page.html` or `src/strings/*.json`, never the generated `index.html` files, then run:
+Edit `src/layout.html`, `src/pages/*.html` or `src/strings/*.json`, never the generated `index.html` files, then run:
 
 ```bash
 python3 build.py
@@ -61,7 +62,8 @@ Then open http://localhost:8765 (the pages in other languages need a server, sin
 
 ## Before release
 
-- **Support email**: `support@example.com` is a placeholder, the same as `AppInfo.supportEmail` in the app. Replace both with the real address (it's in `src/page.html`).
+- **Support email**: `support@example.com` is a placeholder, the same as `AppInfo.supportEmail` in the app. Replace both with the real address (it's in `src/pages/home.html`, `support.html` and `privacy.html`).
 - **App name**: "HabitTracker" is a working name.
 - **App Store link**: the hero says the app is coming soon; add the badge and link once it's out.
 - **Translations**: written to match the app's wording; a native speaker's review is still to do, as for the app.
+- **Privacy policy** (`privacy/`): it describes the app as it is. If HabitTracker Pro ships, add how its purchases work (Apple handles them; the app only checks them on the device), and change the date at the top in every language.
