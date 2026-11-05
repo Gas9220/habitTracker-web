@@ -3,6 +3,8 @@
   "description": "HabitTracker è un tracker di abitudini semplice e riservato per iPhone, iPad, Mac e Apple Watch. Fai il check-in ogni giorno, ricevi promemoria, usa i timer e segui le tue serie.",
   "og_description": "Un tracker di abitudini semplice e riservato per iPhone, iPad, Mac e Apple Watch.",
   "language_label": "Lingua",
+  "theme_to_dark": "Passa al tema scuro",
+  "theme_to_light": "Passa al tema chiaro",
 
   "nav_label": "Principale",
   "nav_features": "Funzioni",

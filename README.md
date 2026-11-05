@@ -18,9 +18,9 @@ make-guide-pdfs.sh     Prints each language's guide to its guide/habittracker-gu
 src/404.html           The page for an address that doesn't exist: one page, whose script picks the language
 index.html             English, the home page (generated), with support/, privacy/ and guide/ beside it
 it/, fr/, es/          The other languages' pages, the same four in each (generated)
-styles.css             Styles, with dark mode (prefers-color-scheme) and layouts for phones
+styles.css             Styles, with the light and dark themes and layouts for phones
 images/                The app icon (app-icon, apple-touch-icon, favicon)
-images/<lang>/         The screenshots in each language, in WebP and resized for the web, and social.jpg
+images/<lang>/         The screenshots in each language, in WebP and resized for the web, with their -dark versions, and social.jpg
 ```
 
 ## Changing the text or the page
@@ -52,9 +52,15 @@ The print styles at the end of `styles.css` decide how they look: A4, the brand 
 
 A menu in the header lists the four languages by their own names, as the app's language picker does. English is at the root and the others in their own folder, each page linking to the others with `hreflang`. On the first visit to the English page, a browser set to Italian, French or Spanish opens that language instead; choosing one in the menu is remembered (`localStorage`), and from then on nothing redirects.
 
+## Themes
+
+The site starts in the device's theme (`prefers-color-scheme`), and the sun or moon button in the header switches to the other. The choice is kept in `localStorage` (`theme`), and a small script in the head sets it as `data-theme` on `<html>` before the page draws, on every page and the 404 page too. Choosing the device's own theme again forgets it, so the page goes back to following the device. `styles.css` has the dark colors twice, once for each way of getting there: change both.
+
+The screenshots follow the theme. Each is a `<picture>` whose `<source media="(prefers-color-scheme: dark)">` is its `-dark.webp`, so a visitor normally downloads only the one shown; while a theme is chosen, the layout's script sets that `media` to `all` or `not all`. The watch's screens are dark in both themes, so they have no dark version.
+
 ## Screenshots
 
-The full-size originals are in `../assets/screenshots/<lang>/iphone/` and `<lang>/watch/` (outside this repository, next to the app), so they can be reused for the App Store page. They're taken in the iOS Simulator (iPhone 18 Pro Max and Apple Watch Series 12, 46mm) with the app's sample data, whose habit names are translated too:
+The full-size originals are in `../assets/screenshots/<lang>/iphone/`, `<lang>/iphone-dark/` and `<lang>/watch/` (outside this repository, next to the app), so they can be reused for the App Store page. They're taken in the iOS Simulator (iPhone 18 Pro Max and Apple Watch Series 12, 46mm) with the app's sample data, whose habit names are translated too:
 
 ```bash
 xcrun simctl status_bar <iPhone> override --time 9:41 --dataNetwork wifi --wifiMode active --wifiBars 3 --cellularMode active --cellularBars 4 --batteryState charged --batteryLevel 100
@@ -64,7 +70,7 @@ xcrun simctl launch <watch> <bundle ID>.watchkitapp -ui-testing -sample-data -Ap
 
 The screens, in order: the habit list, Statistics, its charts (scrolled to the heatmap), Read 20 Pages' page (from the Habits card), Stretch's timer, the Lock Screen with Stretch's timer running, Control Center with the Habit Timer control, a day note on Read 20 Pages, Morning Run's editor and the templates (New Habit › Start from a Template); on the watch, Today and Read 20 Pages.
 
-- The Lock Screen, Control Center, the day note and the templates were taken by a throwaway UI test (never committed), as the app's workflow describes for screenshots. The day note was saved and opened again, so the keyboard is gone.
+- The ten iPhone screens come from a throwaway UI test (never committed), as the app's workflow describes for screenshots, run once per language and theme, with the simulator in that appearance (`xcrun simctl ui <iPhone> appearance dark`), so the two themes show the same screens with the same day's data. The day note was saved and opened again, so the keyboard is gone.
 - The Lock Screen is Notification Center, pulled down over the Home Screen: it looks the same and shows the timer's Live Activity, but with the phone unlocked. Locked, the simulator draws the countdown without its seconds ("9:––"), however the screen is woken. Its clock is the real time, since any `--time` override freezes the countdown too, and its date and Control Center are drawn by the system in the simulator's own language: for each language, set the simulator's first (`AppleLanguages` and `AppleLocale` in its `.GlobalPreferences.plist`, then a reboot). A timer's first Live Activity asks to be allowed, and later whether to keep allowing them: Allow, then Always Allow.
 - Control Center has the Habit Timer control, added by hand once (set to Next Timer, two columns wide so its name shows); the simulator's Control Center has nothing else.
 

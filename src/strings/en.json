@@ -3,6 +3,8 @@
   "description": "HabitTracker is a simple, private habit tracker for iPhone, iPad, Mac and Apple Watch. Check in each day, get reminders, run timers and follow your streaks.",
   "og_description": "A simple, private habit tracker for iPhone, iPad, Mac and Apple Watch.",
   "language_label": "Language",
+  "theme_to_dark": "Switch to the dark theme",
+  "theme_to_light": "Switch to the light theme",
 
   "nav_label": "Main",
   "nav_features": "Features",

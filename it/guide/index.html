@@ -22,6 +22,14 @@
   <link rel="alternate" hreflang="x-default" href="https://gas9220.github.io/habitTracker-web/guide/">
   <link rel="icon" type="image/png" href="../../images/favicon.png">
   <link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
+  <script>
+    // Before the page draws, so a theme chosen earlier doesn't flash the other one first.
+    try {
+      var chosenTheme = localStorage.getItem("theme");
+      if (chosenTheme) document.documentElement.dataset.theme = chosenTheme;
+    } catch (error) {}
+  </script>
+  <noscript><style>.theme-button { display: none; }</style></noscript>
   <link rel="stylesheet" href="../../styles.css">
 
 </head>
@@ -48,6 +56,8 @@
       <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></symbol>
       <symbol id="i-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h7M9 17h4"/></symbol>
       <symbol id="i-access" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.5"/><path d="M5 8.5l7 1.5 7-1.5"/><path d="M12 10v4.5M12 14.5l-3.5 6M12 14.5l3.5 6"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></symbol>
       <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10l5 5 5-5"/></symbol>
       <symbol id="i-tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
     </defs>
@@ -68,19 +78,25 @@
           <a href="../#privacy">Privacy</a>
           <a href="../#contact">Contatti</a>
         </nav>
-        <details class="language-menu">
-          <summary aria-label="Lingua: Italiano">
-            <svg class="globe" aria-hidden="true"><use href="#i-globe"/></svg>
-            <span>Italiano</span>
-            <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
-          </summary>
-          <ul>
-            <li><a href="../../guide/" hreflang="en" lang="en" data-language="en">English<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
-            <li><a href="../../it/guide/" hreflang="it" lang="it" data-language="it" aria-current="page">Italiano<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
-            <li><a href="../../fr/guide/" hreflang="fr" lang="fr" data-language="fr">Français<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
-            <li><a href="../../es/guide/" hreflang="es" lang="es" data-language="es">Español<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
-          </ul>
-        </details>
+        <div class="header-controls">
+          <button class="theme-button" type="button" data-to-dark="Passa al tema scuro" data-to-light="Passa al tema chiaro">
+            <svg class="moon" aria-hidden="true"><use href="#i-moon"/></svg>
+            <svg class="sun" aria-hidden="true"><use href="#i-sun"/></svg>
+          </button>
+          <details class="language-menu">
+            <summary aria-label="Lingua: Italiano">
+              <svg class="globe" aria-hidden="true"><use href="#i-globe"/></svg>
+              <span>Italiano</span>
+              <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            </summary>
+            <ul>
+              <li><a href="../../guide/" hreflang="en" lang="en" data-language="en">English<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+              <li><a href="../../it/guide/" hreflang="it" lang="it" data-language="it" aria-current="page">Italiano<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+              <li><a href="../../fr/guide/" hreflang="fr" lang="fr" data-language="fr">Français<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+              <li><a href="../../es/guide/" hreflang="es" lang="es" data-language="es">Español<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>
+            </ul>
+          </details>
+        </div>
       </div>
     </div>
   </header>
@@ -231,6 +247,47 @@
           link.href = link.href.split("#")[0] + location.hash;
         });
       });
+    })();
+
+    // The theme button: changes the theme and remembers the choice, until it's back to the device's
+    // own, which the page then follows again. A screenshot's dark <source> normally asks for the
+    // device's dark theme; while a theme is chosen, it's always or never used instead.
+    (function () {
+      var root = document.documentElement;
+      var button = document.querySelector(".theme-button");
+      var sources = document.querySelectorAll("picture source");
+      var device = window.matchMedia("(prefers-color-scheme: dark)");
+
+      function isDark() {
+        return root.dataset.theme ? root.dataset.theme === "dark" : device.matches;
+      }
+
+      function update() {
+        var media = { dark: "all", light: "not all" }[root.dataset.theme] || "(prefers-color-scheme: dark)";
+        sources.forEach(function (source) { source.media = media; });
+        var label = isDark() ? button.dataset.toLight : button.dataset.toDark;
+        button.title = label;
+        button.setAttribute("aria-label", label);
+      }
+
+      button.addEventListener("click", function () {
+        var dark = !isDark();
+        try {
+          if (dark === device.matches) {
+            localStorage.removeItem("theme");
+          } else {
+            localStorage.setItem("theme", dark ? "dark" : "light");
+          }
+        } catch (error) {}
+        if (dark === device.matches) {
+          delete root.dataset.theme;
+        } else {
+          root.dataset.theme = dark ? "dark" : "light";
+        }
+        update();
+      });
+      device.addEventListener("change", update);
+      update();
     })();
   </script>
 

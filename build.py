@@ -86,21 +86,21 @@ def language_menu(current, root, strings, page):
     for code, name in LANGUAGES.items():
         selected = code == current
         links.append(
-            f'            <li><a href="{root + folder(code) + page or "./"}" hreflang="{code}" lang="{code}" data-language="{code}"'
+            f'              <li><a href="{root + folder(code) + page or "./"}" hreflang="{code}" lang="{code}" data-language="{code}"'
             + (' aria-current="page"' if selected else "")
             + f'>{name}<svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg></a></li>'
         )
     return "\n".join([
-        '        <details class="language-menu">',
-        f'          <summary aria-label="{html.escape(strings["language_label"], quote=True)}: {LANGUAGES[current]}">',
-        '            <svg class="globe" aria-hidden="true"><use href="#i-globe"/></svg>',
-        f'            <span>{LANGUAGES[current]}</span>',
-        '            <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>',
-        '          </summary>',
-        '          <ul>',
+        '          <details class="language-menu">',
+        f'            <summary aria-label="{html.escape(strings["language_label"], quote=True)}: {LANGUAGES[current]}">',
+        '              <svg class="globe" aria-hidden="true"><use href="#i-globe"/></svg>',
+        f'              <span>{LANGUAGES[current]}</span>',
+        '              <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>',
+        '            </summary>',
+        '            <ul>',
         *links,
-        '          </ul>',
-        '        </details>',
+        '            </ul>',
+        '          </details>',
     ])
 
 

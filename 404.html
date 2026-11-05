@@ -15,6 +15,13 @@
     }
   </script>
   <link rel="icon" type="image/png" href="images/favicon.png">
+  <script>
+    // The theme chosen with the other pages' button, before the page draws.
+    try {
+      var chosenTheme = localStorage.getItem("theme");
+      if (chosenTheme) document.documentElement.dataset.theme = chosenTheme;
+    } catch (error) {}
+  </script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>

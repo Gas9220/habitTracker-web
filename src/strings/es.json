@@ -3,6 +3,8 @@
   "description": "HabitTracker es un registro de hábitos sencillo y privado para iPhone, iPad, Mac y Apple Watch. Registra cada día, recibe recordatorios, usa temporizadores y sigue tus rachas.",
   "og_description": "Un registro de hábitos sencillo y privado para iPhone, iPad, Mac y Apple Watch.",
   "language_label": "Idioma",
+  "theme_to_dark": "Cambiar al tema oscuro",
+  "theme_to_light": "Cambiar al tema claro",
 
   "nav_label": "Principal",
   "nav_features": "Funciones",

@@ -17,11 +17,16 @@
   --device: #1d1d1f;
   --radius: 20px;
   --max: 1120px;
+  /* The header's button: which icon it shows. */
+  --moon: block;
+  --sun: none;
   color-scheme: light dark;
 }
 
+/* The dark theme follows the device, unless one was chosen with the header's button (data-theme on
+   <html>). :where() keeps these rules as weak as plain :root, so the print styles still win. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:where(:not([data-theme="light"])) {
     --blue: #3ba2ff;
     --blue-strong: #5cb3ff;
     --blue-soft: rgba(59, 162, 255, 0.14);
@@ -33,7 +38,30 @@
     --border: rgba(255, 255, 255, 0.09);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
     --device: #2a2c31;
+    --moon: none;
+    --sun: block;
   }
+}
+
+:root:where([data-theme="dark"]) {
+  --blue: #3ba2ff;
+  --blue-strong: #5cb3ff;
+  --blue-soft: rgba(59, 162, 255, 0.14);
+  --bg: #0b0c0f;
+  --bg-alt: #121419;
+  --card: #17191f;
+  --text: #f5f5f7;
+  --text-2: #a3a9b4;
+  --border: rgba(255, 255, 255, 0.09);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --device: #2a2c31;
+  --moon: none;
+  --sun: block;
+  color-scheme: dark;
+}
+
+:root:where([data-theme="light"]) {
+  color-scheme: light;
 }
 
 * {
@@ -63,6 +91,11 @@ main {
 img {
   max-width: 100%;
   display: block;
+}
+
+/* A picture only chooses the light or the dark file: its image lays out as if it weren't there. */
+picture {
+  display: contents;
 }
 
 a {
@@ -145,6 +178,44 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   gap: 24px;
+}
+
+.header-controls {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+/* MARK: Theme button */
+
+.theme-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+.theme-button:hover {
+  color: var(--text);
+}
+
+.theme-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.theme-button .moon {
+  display: var(--moon);
+}
+
+.theme-button .sun {
+  display: var(--sun);
 }
 
 /* MARK: Language menu */
@@ -980,6 +1051,13 @@ section {
 
   .contact-card {
     padding: 32px 20px;
+  }
+}
+
+/* Beside the theme button, the language's name no longer fits: it goes, so the app's stays whole. */
+@media (max-width: 370px) {
+  .language-menu summary span {
+    display: none;
   }
 }
 

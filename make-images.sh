@@ -1,6 +1,7 @@
 #!/bin/zsh
 # Writes the images the pages show, in WebP, from the full-size originals in ../assets, which stay
-# out of this repository: the screenshots into images/<lang>/, and the app icon into images/.
+# out of this repository: the screenshots into images/<lang>/, each with a -dark version for the
+# site's dark theme, and the app icon into images/. The watch's screens are dark in both themes.
 # At this size WebP looks the same as PNG in about a fifteenth of the room, which counts on a phone.
 # Run it after new screenshots, then draw the pictures for shared links again
 # (make-social-images.swift). It needs cwebp: brew install webp.
@@ -26,6 +27,7 @@ for language in en it fr es; do
                 05-timer:timer 06-lock-screen:lock-screen 07-control:control 08-day-note:day-note \
                 09-editor:editor 10-templates:templates; do
     webp $source/iphone/${screen%%:*}.png 660 $output/${screen##*:}.webp
+    webp $source/iphone-dark/${screen%%:*}.png 660 $output/${screen##*:}-dark.webp
   done
   webp $source/watch/01-today.png 0 $output/watch-today.webp
   webp $source/watch/02-habit.png 0 $output/watch-habit.webp
