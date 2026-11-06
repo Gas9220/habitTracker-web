@@ -32,7 +32,9 @@ for language in en it fr es; do
   webp $source/watch/01-today.png 0 $output/watch-today.webp
   webp $source/watch/02-habit.png 0 $output/watch-habit.webp
   webp $source/mac/01-window.png 1100 $output/mac-window.webp
+  webp $source/mac-dark/01-window.png 1100 $output/mac-window-dark.webp
   webp $source/mac/02-menu-bar.png 360 $output/mac-menu-bar.webp
+  webp $source/mac-dark/02-menu-bar.png 360 $output/mac-menu-bar-dark.webp
   echo "wrote images/$language: $(du -sk $output/*.webp | awk '{sum += $1} END {print sum}') KB"
 done
 
